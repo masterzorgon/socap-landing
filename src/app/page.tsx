@@ -19,7 +19,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   description:
-    'Radiant helps you sell more by revealing sensitive information about your customers.',
+    'Social Capital is where attention becomes a market. Anyone on X can be tokenized and traded like a speculative asset.',
 }
 
 function Hero() {
@@ -38,21 +38,33 @@ function Hero() {
             </Link>
           }
         />
-        <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
-          <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[0.8] md:text-9xl/[0.8]">
-            Close every deal.
+        <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48 flex flex-col justify-center items-center text-center">
+          <h1 className="font-display text-gray-950 text-balance text-6xl leading-[1.1] sm:text-8xl font-medium tracking-tight">
+            Speculate
+            <span className="inline-block align-middle mx-3">
+              <img src="/so-cap-icon.svg" alt="Social Capital Icon" width={60} height={60} className="inline-block align-middle mb-6 mx-2" />
+            </span>
+            On People
+            <br />
+            Like They're Memecoins
           </h1>
-          <p className="mt-8 max-w-lg text-xl/7 font-medium text-gray-950/75 sm:text-2xl/8">
-            Radiant helps you sell more by revealing sensitive information about
-            your customers.
+
+          <p className="mt-8 max-w-xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9">
+            Social Capital is where attention becomes a market. Anyone on X &#40;Twitter&#41; can be tokenized and traded like a speculative asset.
           </p>
-          <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
-            <Button href="#">Get started</Button>
+
+          <div className="mt-12 flex flex-col gap-x-6 gap-y-4">
             <Button variant="secondary" href="/pricing">
-              See pricing
+              <img src="/chrome-icon.png" alt="Chrome Icon" width={20} height={20} className="inline-block align-middle mr-2" />
+              Download Chrome Extension
             </Button>
+            <p className="text-sm text-gray-950/75">
+              Also available for other browsers.<br/>
+              <a href="https://github.com/social-capital/social-capital" className="text-gray-950/75 underline hover:text-gray-950">Discover more</a>
+            </p>
           </div>
         </div>
+
       </Container>
     </div>
   )
