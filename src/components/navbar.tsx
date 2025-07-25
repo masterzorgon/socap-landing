@@ -12,10 +12,12 @@ import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
 
 const links = [
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/company', label: 'Company' },
   { href: '/blog', label: 'Blog' },
-  { href: '/login', label: 'Login' },
+  { href: '/support', label: 'Support' }, // FAQ, Docs, Audits, Contracts
+  { href: '/terms', label: 'Terms' },
+  // { href: '/pricing', label: 'Pricing' },
+  // { href: '/company', label: 'Company' },
+  // { href: '/login', label: 'Login' },
 ]
 
 function DesktopNav() {
@@ -83,7 +85,8 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
           <div className="relative flex gap-6">
             <PlusGridItem className="py-3">
               <Link href="/" title="Home">
-                <Logo className="h-9" />
+                {/* <Logo className="h-9" /> */}
+                <img src="/so-cap-icon.svg" alt="Social Capital Icon" width={30} height={30} className="inline-block align-middle mr-2" />
               </Link>
             </PlusGridItem>
             {banner && (

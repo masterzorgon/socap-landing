@@ -14,8 +14,12 @@ import { Navbar } from '@/components/navbar'
 import { Screenshot } from '@/components/screenshot'
 import { Testimonials } from '@/components/testimonials'
 import { Heading, Subheading } from '@/components/text'
+import { Faqs } from '@/components/faq'
+import { Preview } from '@/components/preview'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
+import AutoCarousel from '@/components/carousel'
+import { AnimatedNumber } from '@/components/animated-number'
 
 export const metadata: Metadata = {
   description:
@@ -33,7 +37,7 @@ function Hero() {
               href="/blog/radiant-raises-100m-series-a-from-tailwind-ventures"
               className="flex items-center gap-1 rounded-full bg-fuchsia-950/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-fuchsia-950/30"
             >
-              Radiant raises $100M Series A from Tailwind Ventures
+              Open Beta Is Now Live!
               <ChevronRightIcon className="size-4" />
             </Link>
           }
@@ -53,13 +57,37 @@ function Hero() {
             Social Capital is where attention becomes a market. Anyone on X &#40;Twitter&#41; can be tokenized and traded like a speculative asset.
           </p>
 
+          <div className="max-lg:mt-16 lg:col-span-1">
+            <hr className="mt-6 border-t border-gray-600" />
+            <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
+              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
+                <dt className="text-sm/6 text-gray-600">24h Volume</dt>
+                <dd className="order-first text-6xl font-medium tracking-tight">
+                  $<AnimatedNumber start={100} end={150} />M
+                </dd>
+              </div>
+              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
+                <dt className="text-sm/6 text-gray-600">Markets</dt>
+                <dd className="order-first text-6xl font-medium tracking-tight">
+                  $<AnimatedNumber start={2.5} end={30} />K
+                </dd>
+              </div>
+              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
+                <dt className="text-sm/6 text-gray-600">Users</dt>
+                <dd className="order-first text-6xl font-medium tracking-tight">
+                  <AnimatedNumber start={150} end={200} />K
+                </dd>
+              </div>
+            </dl>
+          </div>
+
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4">
             <Button variant="secondary" href="/pricing">
               <img src="/chrome-icon.png" alt="Chrome Icon" width={20} height={20} className="inline-block align-middle mr-2" />
               Download Chrome Extension
             </Button>
             <p className="text-sm text-gray-950/75">
-              Also available for other browsers.<br/>
+              Also available for other browsers.<br />
               <a href="https://github.com/social-capital/social-capital" className="text-gray-950/75 underline hover:text-gray-950">Discover more</a>
             </p>
           </div>
@@ -202,21 +230,36 @@ function DarkBentoSection() {
   )
 }
 
+function FaqSection() {
+  return (
+    <Faqs />
+  )
+}
+
+function PreviewSection() {
+  return (
+    <Preview />
+  )
+}
+
 export default function Home() {
   return (
     <div className="overflow-hidden">
       <Hero />
       <main>
-        <Container className="mt-10">
-          <LogoCloud />
-        </Container>
+        {/* <Container className="mt-10"> */}
+        {/* <LogoCloud /> */}
+        <AutoCarousel />
+        {/* </Container> */}
         <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+          <PreviewSection />
           <FeatureSection />
-          <BentoSection />
+          {/* <BentoSection /> */}
         </div>
-        <DarkBentoSection />
+        {/* <DarkBentoSection /> */}
       </main>
-      <Testimonials />
+      {/* <Testimonials /> */}
+      <FaqSection />
       <Footer />
     </div>
   )

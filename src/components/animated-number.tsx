@@ -22,7 +22,7 @@ export function AnimatedNumber({
   let isInView = useInView(ref, { once: true, amount: 0.5 })
 
   let value = useMotionValue(start)
-  let spring = useSpring(value, { damping: 30, stiffness: 100 })
+  let spring = useSpring(value, { damping: 80, stiffness: 100})
   let display = useTransform(spring, (num) => num.toFixed(decimals))
 
   useEffect(() => {
