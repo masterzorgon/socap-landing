@@ -235,10 +235,8 @@ function PreviewSection() {
 
 function CarouselSection() {
   return (
-    <div className="overflow-hidden">
-      <Container className='mt-10'>
+    <div className="overflow-hidden w-screen mt-10">
         <Carousel />
-      </Container>
     </div>
   )
 }
