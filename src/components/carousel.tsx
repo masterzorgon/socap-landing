@@ -5,9 +5,9 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid';
 import { UsersIcon } from '@heroicons/react/24/outline';
 
 const stats = [
-  { id: 1, name: '@elonmusk', stat: '71,897', icon: UsersIcon, change: '122', changeType: 'increase', market: 'Perps' },
-  { id: 2, name: '@masterzorgon', stat: '58.16%', icon: UsersIcon, change: '5.4%', changeType: 'increase', market: 'Spot' },
-  { id: 3, name: '@so_capital', stat: '24.57%', icon: UsersIcon, change: '3.2%', changeType: 'decrease', market: 'Perps' },
+  { id: 1, name: '@elonmusk', stat: '71.89K', pfp: "https://pbs.twimg.com/profile_images/1787927879646396417/scmjMaBs_400x400.jpg", amount: '122%', changeType: 'increase', market: 'Perps' },
+  { id: 2, name: '@masterzorgon', stat: '58.16M', pfp: "https://pbs.twimg.com/profile_images/1936002956333080576/kqqe2iWO_400x400.jpg", amount: '5.42%', changeType: 'increase', market: 'Spot' },
+  { id: 3, name: '@so_capital', stat: '24.57K', pfp: "https://pbs.twimg.com/profile_images/1748108741503803392/EmT4yP6S_400x400.jpg", amount: '3.22%', changeType: 'decrease', market: 'Perps' },
 ];
 
 // duplicate the items to enable seamless continuous scrolling
@@ -18,11 +18,15 @@ interface CarouselCardProps {
 }
 
 const CarouselCard = ({ item }: CarouselCardProps) => (
-  <div className="relative flex-shrink-0 w-full max-w-xs px-4 mt-10">
+  <div className="relative flex-shrink-0 w-full max-w-xs px-4">
     <div className="relative overflow-hidden rounded-lg bg-white p-6 shadow-sm">
       <dt>
-        <div className="absolute rounded-md bg-indigo-500 p-3 ">
-          <item.icon aria-hidden="true" className="h-6 w-6 text-white" />
+        <div className="absolute rounded-full border-1 border-gray-100">
+          <img 
+            src={item.pfp} 
+            alt={`${item.name} profile picture`}
+            className="h-12 w-12 rounded-full object-cover" 
+          />
         </div>
         <div className="flex justify-between">
             <p className="ml-16 truncate text-sm font-medium text-gray-500">
@@ -48,14 +52,14 @@ const CarouselCard = ({ item }: CarouselCardProps) => (
           <span className="sr-only">
             {item.changeType === 'increase' ? 'Increased' : 'Decreased'} by
           </span>
-          {item.change}
+          {item.amount}
         </p>
       </dd>
     </div>
   </div>
 );
 
-export default function AutoCarousel() {
+export default function Carousel() {
   // original cycle duration (seconds)
   const baseDuration = stats.length * 5; // e.g., 3 * 5 = 15s
   // slow down by 40% → new speed = 60% of original, so duration increases by 1/0.6

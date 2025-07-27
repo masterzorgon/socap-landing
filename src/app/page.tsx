@@ -6,19 +6,16 @@ import { Gradient } from '@/components/gradient'
 import { Keyboard } from '@/components/keyboard'
 import { Link } from '@/components/link'
 import { LinkedAvatars } from '@/components/linked-avatars'
-import { LogoCloud } from '@/components/logo-cloud'
 import { LogoCluster } from '@/components/logo-cluster'
 import { LogoTimeline } from '@/components/logo-timeline'
 import { Map } from '@/components/map'
 import { Navbar } from '@/components/navbar'
 import { Screenshot } from '@/components/screenshot'
-import { Testimonials } from '@/components/testimonials'
 import { Heading, Subheading } from '@/components/text'
-import { Faqs } from '@/components/faq'
 import { Preview } from '@/components/preview'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
-import AutoCarousel from '@/components/carousel'
+import Carousel from '@/components/carousel'
 import { AnimatedNumber } from '@/components/animated-number'
 
 export const metadata: Metadata = {
@@ -42,8 +39,8 @@ function Hero() {
             </Link>
           }
         />
-        <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48 flex flex-col justify-center items-center text-center">
-          <h1 className="font-display text-gray-950 text-balance text-6xl leading-[1.1] sm:text-8xl font-medium tracking-tight">
+        <div className="pt-16 pb-24 sm:py-24 flex flex-col justify-center items-center text-center">
+          <h1 className="pb-1 font-display text-balance text-6xl leading-[1.1] sm:text-8xl font-medium tracking-tight text-black">
             Speculate
             <span className="inline-block align-middle mx-3">
               <img src="/so-cap-icon.svg" alt="Social Capital Icon" width={60} height={60} className="inline-block align-middle mb-6 mx-2" />
@@ -53,7 +50,7 @@ function Hero() {
             Like They're Memecoins
           </h1>
 
-          <p className="mt-8 max-w-xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9">
+          <p className="my-8 max-w-3xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9">
             Social Capital is where attention becomes a market. Anyone on X &#40;Twitter&#41; can be tokenized and traded like a speculative asset.
           </p>
 
@@ -62,19 +59,19 @@ function Hero() {
             <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
               <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
                 <dt className="text-sm/6 text-gray-600">24h Volume</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight">
+                <dd className="order-first text-6xl font-medium tracking-tight bg-gradient-to-b from-gray-900 via-gray-600 to-gray-900 bg-clip-text text-transparent">
                   $<AnimatedNumber start={100} end={150} />M
                 </dd>
               </div>
               <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
                 <dt className="text-sm/6 text-gray-600">Markets</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight">
-                  $<AnimatedNumber start={2.5} end={30} />K
+                <dd className="order-first text-6xl font-medium tracking-tight bg-gradient-to-b from-gray-900 via-gray-600 to-gray-900 bg-clip-text text-transparent">
+                  <AnimatedNumber start={2.5} end={30} />K
                 </dd>
               </div>
               <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
                 <dt className="text-sm/6 text-gray-600">Users</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight">
+                <dd className="order-first text-6xl font-medium tracking-tight bg-gradient-to-b from-gray-900 via-gray-600 to-gray-900 bg-clip-text text-transparent">
                   <AnimatedNumber start={150} end={200} />K
                 </dd>
               </div>
@@ -230,15 +227,19 @@ function DarkBentoSection() {
   )
 }
 
-function FaqSection() {
-  return (
-    <Faqs />
-  )
-}
-
 function PreviewSection() {
   return (
     <Preview />
+  )
+}
+
+function CarouselSection() {
+  return (
+    <div className="overflow-hidden">
+      <Container className='mt-10'>
+        <Carousel />
+      </Container>
+    </div>
   )
 }
 
@@ -249,17 +250,16 @@ export default function Home() {
       <main>
         {/* <Container className="mt-10"> */}
         {/* <LogoCloud /> */}
-        <AutoCarousel />
+        <CarouselSection />
         {/* </Container> */}
         <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
-          <PreviewSection />
-          <FeatureSection />
+          {/* <PreviewSection /> */}
+          {/* <FeatureSection /> */}
           {/* <BentoSection /> */}
         </div>
         {/* <DarkBentoSection /> */}
       </main>
       {/* <Testimonials /> */}
-      <FaqSection />
       <Footer />
     </div>
   )
