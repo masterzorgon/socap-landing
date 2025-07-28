@@ -36,7 +36,7 @@ const stats = [
 ]
 
 // Duplicate once for seamless looping
-const loopStats = [...stats, ...stats]
+const loopStats = [...stats, ...stats, ...stats, ...stats]
 
 interface CarouselCardProps {
   item: typeof stats[0]
@@ -93,7 +93,7 @@ export default function Carousel() {
       className="
         relative
         m-auto
-        w-full max-w-4xl
+        w-screen
         overflow-hidden
         bg-white
         before:absolute before:left-0 before:top-0 before:z-10
@@ -109,7 +109,7 @@ export default function Carousel() {
       <motion.div
         className="flex"
         style={{ width: `${(loopStats.length / stats.length) * 100}%` }} // 200%
-        animate={{ x: ['0%', '-50%'] }}
+        animate={{ x: ['0%', '-30%'] }}
         transition={{
           x: {
             repeat: Infinity,

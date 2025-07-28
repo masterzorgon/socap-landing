@@ -222,7 +222,7 @@ function Points() {
             <h3 className="ml-3 text-lg font-semibold text-gray-900">Slashing</h3>
           </div>
           <p className="text-gray-600 text-sm">
-            Users engaging in malicious behavior or violating Social Capital policy are subject to having their points slashed partially or completely.
+            Users engaging in malicious behavior or violating Social Capital policy are subject to having their points slashed.
           </p>
         </div>
       </section>
