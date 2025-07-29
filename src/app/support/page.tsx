@@ -6,9 +6,11 @@ import { Navbar } from "@/components/navbar"
 import { Container } from "@/components/container"
 import { Heading, Lead } from "@/components/text"
 import { Disclosure } from '@headlessui/react'
-import { ChevronRightIcon, CloudArrowUpIcon, MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
-import { LockClosedIcon, PlusIcon, ServerIcon } from '@heroicons/react/24/solid';
+import { ChevronRightIcon, MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
+import { LockClosedIcon, ServerIcon } from '@heroicons/react/24/solid';
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 
 const faqs = [
   {
@@ -43,6 +45,70 @@ const faqs = [
   },
 ]
 
+// Toast component with smooth animations
+function Toast({ message, isVisible, onClose }: { message: string; isVisible: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 3000); // Auto-hide after 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, onClose]);
+
+  return (
+    <div className={`fixed top-4 right-4 z-50 transition-opacity duration-300 ease-in-out ${
+      isVisible 
+        ? 'opacity-100' 
+        : 'opacity-0 pointer-events-none'
+    }`}>
+      <div className="bg-gray-900 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2">
+        <div className="flex-shrink-0">
+          <svg className="h-5 w-5 text-[#fd3bb8]" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+          </svg>
+        </div>
+        <span className="text-sm font-medium">{message}</span>
+        <button
+          onClick={onClose}
+          className="flex-shrink-0 ml-2 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+        >
+          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Utility function to copy URL to clipboard
+const copyToClipboard = async (url: string, setToast: (message: string) => void) => {
+  try {
+    await navigator.clipboard.writeText(url);
+    setToast("URL copied to clipboard!");
+  } catch (err) {
+    console.error('Failed to copy to clipboard:', err);
+    setToast("Failed to copy URL to clipboard");
+  }
+};
+
+// Utility function to handle header clicks
+const handleHeaderClick = (sectionId: string, router: any, setToast: (message: string) => void) => {
+  const url = `${window.location.origin}/support#${sectionId}`;
+  copyToClipboard(url, setToast);
+  
+  // Update the URL without page reload
+  router.push(`/support#${sectionId}`);
+  
+  // Smooth scroll to the section
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 function Header() {
   return (
     <Container className="mt-16 bg-white">
@@ -56,14 +122,19 @@ function Header() {
   )
 }
 
-function FAQ() {
+function FAQSection({ setToast }: { setToast: (message: string) => void }) {
+  const router = useRouter();
   // Split FAQs into two arrays for left and right columns
   const leftFaqs = faqs.slice(0, Math.ceil(faqs.length / 2));
   const rightFaqs = faqs.slice(Math.ceil(faqs.length / 2));
 
   return (
     <Container className="mt-16">
-      <h2 className="text-2xl font-medium tracking-tight text-gray-800 mb-16">
+      <h2 
+        id="faq"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        onClick={() => handleHeaderClick('faq', router, setToast)}
+      >
         Frequently Asked Questions
       </h2>
       <section className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
@@ -139,19 +210,26 @@ function FAQ() {
           </dl>
         </div>
       </section>
+      <Divider />
     </Container>
   )
 }
 
-function Audits() {
+function AuditsSection({ setToast }: { setToast: (message: string) => void }) {
+  const router = useRouter();
+  
   return (
     <Container className="mt-16">
-      <h2 className="text-2xl font-medium tracking-tight text-gray-800">
+      <h2 
+        id="audits"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        onClick={() => handleHeaderClick('audits', router, setToast)}
+      >
         Audits and Contracts
       </h2>
       <section>
         <div className="max-w-lg">
-          <ul role="list" className="mt-8 space-y-8 text-gray-600">
+          <ul role="list" className="space-y-8 text-gray-600">
             <li className="flex gap-x-3">
               <LockClosedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#fd3bb8]" />
               <span>
@@ -167,14 +245,21 @@ function Audits() {
           </ul>
         </div>
       </section>
+      <Divider />
     </Container>
   )
 }
 
-function Points() {
+function PointsSection({ setToast }: { setToast: (message: string) => void }) {
+  const router = useRouter();
+  
   return (
     <Container className="mt-16">
-      <h2 className="text-2xl font-medium tracking-tight text-gray-800">
+      <h2 
+        id="points"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        onClick={() => handleHeaderClick('points', router, setToast)}
+      >
         Our Points System
       </h2>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
@@ -226,38 +311,78 @@ function Points() {
           </p>
         </div>
       </section>
+      <Divider hidden={false} />
     </Container>
   )
 }
 
-function GetInTouch() {
+function IntroSection({ setToast }: { setToast: (message: string) => void }) {
+  const router = useRouter();
+  
   return (
     <Container className="mt-16">
-      <h2 className="text-2xl font-medium tracking-tight text-gray-800">
-        Get in touch
+      <h2 
+        id="introduction"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        onClick={() => handleHeaderClick('introduction', router, setToast)}
+      >
+        Introduction
       </h2>
       <section>
-     
+        <p className="text-gray-600">
+          Social Capital is a decentralized exchange that allows users to trade 
+        </p>
       </section>
+      <Divider />
     </Container>
   )
 }
 
-function Divider() {
+function DesignSection({ setToast }: { setToast: (message: string) => void }) {
+  const router = useRouter();
+  
   return (
     <Container className="mt-16">
-      <div className="relative border-t border-gray-300">
-        <div aria-hidden="true" className="absolute inset-0 flex items-center">
-          <div className="max-w-lg mx-auto">
-            <div className="w-full border-t border-gray-300" />
-          </div>
-        </div>
-      </div>
+      <h2 
+        id="design"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        onClick={() => handleHeaderClick('design', router, setToast)}
+      >
+        Design Panorama
+      </h2>
+      <section>
+        <p className="text-gray-600">Token Creation</p>
+        <p className="text-gray-600">Orderbook</p>
+        <p className="text-gray-600">Order Types</p>
+        <p className="text-gray-600">TP/SL</p>
+        <p className="text-gray-600">Margin</p>
+        <p className="text-gray-600">Liquidations</p>
+        <p className="text-gray-600">Funding</p>
+      </section>
+      <Divider />
     </Container>
+  )
+}
+
+function Divider({ hidden = true }: { hidden?: boolean }) {
+  return (
+    <div className="mt-16 w-full">
+      <div className={`relative ${hidden ? 'border-t border-gray-300' : 'border-none'}`} />
+    </div>
   )
 }
 
 export default function Support() {
+  const [toast, setToast] = useState({ message: '', isVisible: false });
+
+  const showToast = (message: string) => {
+    setToast({ message, isVisible: true });
+  };
+
+  const hideToast = () => {
+    setToast({ message: '', isVisible: false });
+  };
+
   return (
     <main className="overflow-hidden">
       <GradientBackground />
@@ -276,13 +401,18 @@ export default function Support() {
       </Container>
 
       <Header />
-      <FAQ />
-      <Divider />
-      <Audits />
-      <Divider />
-      <Points />
-      <Divider />
+      <IntroSection setToast={showToast} />
+      <DesignSection setToast={showToast} />
+      <FAQSection setToast={showToast} />
+      <AuditsSection setToast={showToast} />
+      <PointsSection setToast={showToast} />
       <Footer />
+      
+      <Toast 
+        message={toast.message} 
+        isVisible={toast.isVisible} 
+        onClose={hideToast} 
+      />
     </main>
   )
 }
