@@ -7,7 +7,7 @@ import { Container } from "@/components/container"
 import { Heading, Lead } from "@/components/text"
 import { Disclosure } from '@headlessui/react'
 import { ChevronRightIcon, MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
-import { LockClosedIcon, ServerIcon } from '@heroicons/react/24/solid';
+import { LockClosedIcon, ServerIcon, ArrowRightCircleIcon } from '@heroicons/react/24/solid';
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
@@ -338,26 +338,86 @@ function IntroSection({ setToast }: { setToast: (message: string) => void }) {
   )
 }
 
-function DesignSection({ setToast }: { setToast: (message: string) => void }) {
+interface UserGuideItem {
+  title: string;
+  content: string;
+  showDivider?: boolean;
+}
+
+function UserGuidesSection({ 
+  setToast, 
+  guides 
+}: { 
+  setToast: (message: string) => void;
+  guides: UserGuideItem[];
+}) {
   const router = useRouter();
   
   return (
     <Container className="mt-16">
       <h2 
-        id="design"
+        id="user-guides"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
-        onClick={() => handleHeaderClick('design', router, setToast)}
+        onClick={() => handleHeaderClick('user-guides', router, setToast)}
       >
-        Design Panorama
+        User Guides
       </h2>
       <section>
-        <p className="text-gray-600">Token Creation</p>
-        <p className="text-gray-600">Orderbook</p>
-        <p className="text-gray-600">Order Types</p>
-        <p className="text-gray-600">TP/SL</p>
-        <p className="text-gray-600">Margin</p>
-        <p className="text-gray-600">Liquidations</p>
-        <p className="text-gray-600">Funding</p>
+        {guides.map((guide, index) => (
+          <div key={guide.title}>
+            <div className="flex items-center gap-2">
+              <ArrowRightCircleIcon className="size-4 text-[#fd3bb8]" />
+              <h3 className="text-gray-800 my-4 font-medium text-lg">{guide.title}</h3>
+            </div>
+            <p className="mb-4">{guide.content}</p>
+            {guide.showDivider && index < guides.length - 1 && (
+              <hr className="border-t border-.5 border-gray-300 border-dashed" />
+            )}
+          </div>
+        ))}
+      </section>
+      <Divider />
+    </Container>
+  )
+}
+
+interface ArchitectureItem {
+  title: string;
+  content: string;
+  showDivider?: boolean;
+}
+
+function ArchitectureSection({ 
+  setToast, 
+  architectureItems 
+}: { 
+  setToast: (message: string) => void;
+  architectureItems: ArchitectureItem[];
+}) {
+  const router = useRouter();
+  
+  return (
+    <Container className="mt-16">
+      <h2 
+        id="architecture"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        onClick={() => handleHeaderClick('architecture', router, setToast)}
+      >
+        Architecture
+      </h2>
+      <section>
+        {architectureItems.map((item, index) => (
+          <div key={item.title}>
+            <div className="flex items-center gap-2">
+              <ArrowRightCircleIcon className="size-4 text-[#fd3bb8]" />
+              <h3 className="text-gray-800 my-4 font-medium text-lg">{item.title}</h3>
+            </div>
+            <p className="mb-4">{item.content}</p>
+            {item.showDivider && index < architectureItems.length - 1 && (
+              <hr className="border-t border-.5 border-gray-300 border-dashed" />
+            )}
+          </div>
+        ))}
       </section>
       <Divider />
     </Container>
@@ -383,6 +443,69 @@ export default function Support() {
     setToast({ message: '', isVisible: false });
   };
 
+  // Define the guides data
+  const userGuides: UserGuideItem[] = [
+    {
+      title: "Token Creation",
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
+      showDivider: true
+    },
+    {
+      title: "Orderbook",
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
+      showDivider: true
+    },
+    {
+      title: "Order Types",
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
+      showDivider: true
+    },
+    {
+      title: "TP/SL",
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
+      showDivider: true
+    },
+    {
+      title: "Margin",
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
+      showDivider: true
+    },
+    {
+      title: "Liquidations",
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
+      showDivider: true
+    },
+    {
+      title: "Funding",
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
+      showDivider: false
+    }
+  ];
+
+  // Define the architecture items data
+  const architectureItems: ArchitectureItem[] = [
+    {
+      title: "Modular Design",
+      content: "Social Capital employs a sophisticated, modular architecture that separates the time-sensitive operations of order propagation and matching from the less time-critical, but security-paramount, function of on-chain settlement.",
+      showDivider: true
+    },
+    {
+      title: "Order Propagation",
+      content: "Our system handles high-frequency order propagation with minimal latency, ensuring that market orders are processed efficiently and accurately across all trading pairs.",
+      showDivider: true
+    },
+    {
+      title: "Matching Engine",
+      content: "The matching engine processes orders in real-time, providing fast execution and maintaining market integrity through sophisticated order matching algorithms.",
+      showDivider: true
+    },
+    {
+      title: "On-Chain Settlement",
+      content: "Security-critical operations are handled on-chain, ensuring transparency and immutability while maintaining the highest standards of financial security.",
+      showDivider: false
+    }
+  ];
+
   return (
     <main className="overflow-hidden">
       <GradientBackground />
@@ -402,7 +525,8 @@ export default function Support() {
 
       <Header />
       <IntroSection setToast={showToast} />
-      <DesignSection setToast={showToast} />
+      <UserGuidesSection setToast={showToast} guides={userGuides} />
+      <ArchitectureSection setToast={showToast} architectureItems={architectureItems} />
       <FAQSection setToast={showToast} />
       <AuditsSection setToast={showToast} />
       <PointsSection setToast={showToast} />
