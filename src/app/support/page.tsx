@@ -7,43 +7,10 @@ import { Container } from "@/components/container"
 import { Heading, Lead } from "@/components/text"
 import { Disclosure } from '@headlessui/react'
 import { ChevronRightIcon, MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
-import { LockClosedIcon, ServerIcon, ArrowRightCircleIcon } from '@heroicons/react/24/solid';
+import { LockClosedIcon, ServerIcon, StarIcon } from '@heroicons/react/24/solid';
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
-
-const faqs = [
-  {
-    question: "What fees do you take?",
-    answer:
-      "...",
-  },
-  {
-    question: 'Which blockchains are you built on?',
-    answer:
-      "...",
-  },
-  {
-    question: 'Can I use my Solana assets on Social Capital?',
-    answer:
-      "...",
-  },
-  {
-    question: 'Is Social Capital audited?',
-    answer:
-      "...",
-  },
-  {
-    question: 'Which browsers are supported?',
-    answer:
-      "...",
-  },
-  {
-    question: 'Will Social Capital have a token?',
-    answer:
-      "...",
-  },
-]
 
 // Toast component with smooth animations
 function Toast({ message, isVisible, onClose }: { message: string; isVisible: boolean; onClose: () => void }) {
@@ -122,7 +89,7 @@ function Header() {
   )
 }
 
-function FAQSection({ setToast }: { setToast: (message: string) => void }) {
+function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; faqs: Array<{question: string; answer: string}> }) {
   const router = useRouter();
   // Split FAQs into two arrays for left and right columns
   const leftFaqs = faqs.slice(0, Math.ceil(faqs.length / 2));
@@ -210,7 +177,7 @@ function FAQSection({ setToast }: { setToast: (message: string) => void }) {
           </dl>
         </div>
       </section>
-      <Divider />
+      <hr className="mt-16 border-t border-gray-300" />
     </Container>
   )
 }
@@ -245,12 +212,24 @@ function AuditsSection({ setToast }: { setToast: (message: string) => void }) {
           </ul>
         </div>
       </section>
-      <Divider />
+      <hr className="mt-16 border-t border-gray-300" />
     </Container>
   )
 }
 
-function PointsSection({ setToast }: { setToast: (message: string) => void }) {
+interface PointItem {
+  id: number;
+  title: string;
+  description: string;
+}
+
+function PointsSection({ 
+  setToast, 
+  points 
+}: { 
+  setToast: (message: string) => void;
+  points: PointItem[];
+}) {
   const router = useRouter();
   
   return (
@@ -263,55 +242,21 @@ function PointsSection({ setToast }: { setToast: (message: string) => void }) {
         Our Points System
       </h2>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
-        <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div className="flex items-center mb-4">
-            <div className="w-8 h-8 border-2 border-[#fd3bb8] rounded-full flex items-center justify-center">
-              <span className="text-sm font-semibold">1</span>
+        {points.map((point) => (
+          <div key={point.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+            <div className="flex items-center mb-4">
+              <div className="w-8 h-8 border-2 border-[#fd3bb8] rounded-full flex items-center justify-center">
+                <span className="text-sm font-semibold">{point.id}</span>
+              </div>
+              <h3 className="ml-3 text-lg font-semibold text-gray-900">{point.title}</h3>
             </div>
-            <h3 className="ml-3 text-lg font-semibold text-gray-900">Providing Liquidity</h3>
+            <p className="text-gray-600 text-sm">
+              {point.description}
+            </p>
           </div>
-          <p className="text-gray-600 text-sm">
-            Earn points by providing liquidity to our pools. The more liquidity you provide and the longer you keep it, the more points you earn.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div className="flex items-center mb-4">
-            <div className="w-8 h-8 border-2 border-[#fd3bb8] rounded-full flex items-center justify-center">
-              <span className="text-sm font-semibold">3</span>
-            </div>
-            <h3 className="ml-3 text-lg font-semibold text-gray-900">Trading Activity</h3>
-          </div>
-          <p className="text-gray-600 text-sm">
-            Active traders earn points based on their trading volume and frequency. Higher volume and consistent trading activity yield more points.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div className="flex items-center mb-4">
-            <div className="w-8 h-8 border-2 border-[#fd3bb8] rounded-full flex items-center justify-center">
-              <span className="text-sm font-semibold">2</span>
-            </div>
-            <h3 className="ml-3 text-lg font-semibold text-gray-900">Early Adopters</h3>
-          </div>
-          <p className="text-gray-600 text-sm">
-            Users who join Social Capital early receive bonus points. The earlier you join, the more bonus points you'll receive.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div className="flex items-center mb-4">
-            <div className="w-8 h-8 border-2 border-[#fd3bb8] rounded-full flex items-center justify-center">
-              <span className="text-sm font-semibold">4</span>
-            </div>
-            <h3 className="ml-3 text-lg font-semibold text-gray-900">Slashing</h3>
-          </div>
-          <p className="text-gray-600 text-sm">
-            Users engaging in malicious behavior or violating Social Capital policy are subject to having their points slashed.
-          </p>
-        </div>
+        ))}
       </section>
-      <Divider hidden={false} />
+      <hr className="mt-16 border-t border-gray-300" />
     </Container>
   )
 }
@@ -333,7 +278,7 @@ function IntroSection({ setToast }: { setToast: (message: string) => void }) {
           Social Capital is a decentralized exchange that allows users to trade 
         </p>
       </section>
-      <Divider />
+      <hr className="mt-16 border-t border-gray-300" />
     </Container>
   )
 }
@@ -341,7 +286,6 @@ function IntroSection({ setToast }: { setToast: (message: string) => void }) {
 interface UserGuideItem {
   title: string;
   content: string;
-  showDivider?: boolean;
 }
 
 function UserGuidesSection({ 
@@ -366,17 +310,17 @@ function UserGuidesSection({
         {guides.map((guide, index) => (
           <div key={guide.title}>
             <div className="flex items-center gap-2">
-              <ArrowRightCircleIcon className="size-4 text-[#fd3bb8]" />
+              <StarIcon className="size-4 text-[#fd3bb8]" />
               <h3 className="text-gray-800 my-4 font-medium text-lg">{guide.title}</h3>
             </div>
             <p className="mb-4">{guide.content}</p>
-            {guide.showDivider && index < guides.length - 1 && (
-              <hr className="border-t border-.5 border-gray-300 border-dashed" />
+            {index < guides.length - 1 && (
+              <hr className="border-t border-gray-300 border-dashed" />
             )}
           </div>
         ))}
       </section>
-      <Divider />
+      <hr className="mt-16 border-t border-gray-300" />
     </Container>
   )
 }
@@ -384,7 +328,6 @@ function UserGuidesSection({
 interface ArchitectureItem {
   title: string;
   content: string;
-  showDivider?: boolean;
 }
 
 function ArchitectureSection({ 
@@ -409,26 +352,44 @@ function ArchitectureSection({
         {architectureItems.map((item, index) => (
           <div key={item.title}>
             <div className="flex items-center gap-2">
-              <ArrowRightCircleIcon className="size-4 text-[#fd3bb8]" />
+              <StarIcon className="size-4 text-[#fd3bb8]" />
               <h3 className="text-gray-800 my-4 font-medium text-lg">{item.title}</h3>
             </div>
             <p className="mb-4">{item.content}</p>
-            {item.showDivider && index < architectureItems.length - 1 && (
-              <hr className="border-t border-.5 border-gray-300 border-dashed" />
+            {index < architectureItems.length - 1 && (
+              <hr className="border-t border-gray-300 border-dashed" />
             )}
           </div>
         ))}
       </section>
-      <Divider />
+      <hr className="mt-16 border-t border-gray-300" />
     </Container>
   )
 }
 
-function Divider({ hidden = true }: { hidden?: boolean }) {
+function ContactSection({
+  setToast,
+}: { 
+  setToast: (message: string) => void;
+}) {
+  const router = useRouter();
+
   return (
-    <div className="mt-16 w-full">
-      <div className={`relative ${hidden ? 'border-t border-gray-300' : 'border-none'}`} />
-    </div>
+    <Container className="mt-16">
+      <h2 
+        id="contact"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        onClick={() => handleHeaderClick('contact', router, setToast)}
+      >
+        Contact Us
+      </h2>
+      <section>
+        <p className="text-gray-600">
+          If you have any questions, please contact us at <a href="mailto:support@socialcapital.com" className="text-[#fd3bb8] hover:underline">support@socialcapital.com</a> or join our <a href="https://discord.gg/socialcapital" target="_blank" rel="noopener noreferrer" className="text-[#fd3bb8] hover:underline">Telegram</a>.
+        </p>
+      </section>
+      <hr className="mt-16 border-none" />
+    </Container>
   )
 }
 
@@ -443,66 +404,112 @@ export default function Support() {
     setToast({ message: '', isVisible: false });
   };
 
+  const faqsData = [
+    {
+      question: "What fees do you take?",
+      answer:
+        "...",
+    },
+    {
+      question: 'Which blockchains are you built on?',
+      answer:
+        "...",
+    },
+    {
+      question: 'Can I use my Solana assets on Social Capital?',
+      answer:
+        "...",
+    },
+    {
+      question: 'Is Social Capital audited?',
+      answer:
+        "...",
+    },
+    {
+      question: 'Which browsers are supported?',
+      answer:
+        "...",
+    },
+    {
+      question: 'Will Social Capital have a token?',
+      answer:
+        "...",
+    },
+  ]
+
+  // Define the points data
+  const pointsData: PointItem[] = [
+    {
+      id: 1,
+      title: "Providing Liquidity",
+      description: "Earn points by providing liquidity to our pools. The more liquidity you provide and the longer you keep it, the more points you earn."
+    },
+    {
+      id: 2,
+      title: "Early Adopters",
+      description: "Users who join Social Capital early receive bonus points. The earlier you join, the more bonus points you'll receive."
+    },
+    {
+      id: 3,
+      title: "Trading Activity",
+      description: "Active traders earn points based on their trading volume and frequency. Higher volume and consistent trading activity yield more points."
+    },
+    {
+      id: 4,
+      title: "Slashing",
+      description: "Users engaging in malicious behavior or violating Social Capital policy are subject to having their points slashed."
+    }
+  ];
+
   // Define the guides data
   const userGuides: UserGuideItem[] = [
     {
       title: "Token Creation",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
-      showDivider: true
+      content: "..."
     },
     {
-      title: "Orderbook",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
-      showDivider: true
+      title: "Trading on Spot",
+      content: "..."
     },
     {
-      title: "Order Types",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
-      showDivider: true
+      title: "Trading on Perps",
+      content: "..."
     },
     {
       title: "TP/SL",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
-      showDivider: true
+      content: "..."
     },
-    {
-      title: "Margin",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
-      showDivider: true
-    },
-    {
-      title: "Liquidations",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
-      showDivider: true
-    },
-    {
-      title: "Funding",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis mollitia amet nemo. Illum, tempora. Incidunt veritatis odit nam voluptatibus nihil, laborum possimus impedit nostrum eligendi sequi quo. Beatae, corporis laudantium.",
-      showDivider: false
-    }
   ];
 
   // Define the architecture items data
   const architectureItems: ArchitectureItem[] = [
     {
       title: "Modular Design",
-      content: "Social Capital employs a sophisticated, modular architecture that separates the time-sensitive operations of order propagation and matching from the less time-critical, but security-paramount, function of on-chain settlement.",
-      showDivider: true
+      content: "..."
     },
     {
       title: "Order Propagation",
-      content: "Our system handles high-frequency order propagation with minimal latency, ensuring that market orders are processed efficiently and accurately across all trading pairs.",
-      showDivider: true
+      content: "..."
     },
     {
       title: "Matching Engine",
-      content: "The matching engine processes orders in real-time, providing fast execution and maintaining market integrity through sophisticated order matching algorithms.",
-      showDivider: true
+      content: "..."
     },
     {
       title: "On-Chain Settlement",
-      content: "Security-critical operations are handled on-chain, ensuring transparency and immutability while maintaining the highest standards of financial security.",
-      showDivider: false
+      content: "..."
+    },
+    {
+      title: "Margin (Cross & Isolated)",
+      content: "..."
+    },
+    {
+      title: "Liquidations",
+      content: "..."
+    },
+    {
+      title: "Funding",
+      content: "..."
     }
   ];
 
@@ -527,9 +534,10 @@ export default function Support() {
       <IntroSection setToast={showToast} />
       <UserGuidesSection setToast={showToast} guides={userGuides} />
       <ArchitectureSection setToast={showToast} architectureItems={architectureItems} />
-      <FAQSection setToast={showToast} />
+      <FAQSection setToast={showToast} faqs={faqsData} />
       <AuditsSection setToast={showToast} />
-      <PointsSection setToast={showToast} />
+      <PointsSection setToast={showToast} points={pointsData} />
+      <ContactSection setToast={showToast} />
       <Footer />
       
       <Toast 

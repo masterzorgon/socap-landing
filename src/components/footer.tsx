@@ -145,11 +145,11 @@ export function Footer() {
           <PlusGrid className="pb-16">
             <PlusGridRow>
               <div className="grid grid-cols-2 gap-y-10 pb-6 lg:grid-cols-6 lg:gap-8">
-                <div className="col-span-2 flex">
+                {/* <div className="col-span-2 flex">
                   <PlusGridItem className="pt-6 lg:pb-6">
                     <Logo className="h-9" />
                   </PlusGridItem>
-                </div>
+                </div> */}
                 <div className="col-span-2 grid grid-cols-2 gap-x-8 gap-y-12 lg:col-span-4 lg:grid-cols-subgrid lg:pt-6">
                   <Sitemap />
                 </div>
