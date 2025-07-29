@@ -476,7 +476,7 @@ export default function Support() {
       content: "..."
     },
     {
-      title: "TP/SL",
+      title: "Take Profit / Stop Loss",
       content: "..."
     },
   ];
@@ -484,19 +484,7 @@ export default function Support() {
   // Define the architecture items data
   const architectureItems: ArchitectureItem[] = [
     {
-      title: "Modular Design",
-      content: "..."
-    },
-    {
-      title: "Order Propagation",
-      content: "..."
-    },
-    {
-      title: "Matching Engine",
-      content: "..."
-    },
-    {
-      title: "On-Chain Settlement",
+      title: "Permissionless Markets",
       content: "..."
     },
     {
