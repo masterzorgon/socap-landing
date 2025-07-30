@@ -13,10 +13,12 @@ import { Navbar } from '@/components/navbar'
 import { Screenshot } from '@/components/screenshot'
 import { Heading, Subheading } from '@/components/text'
 import { Preview } from '@/components/preview'
-import { ChevronRightIcon } from '@heroicons/react/16/solid'
-import type { Metadata } from 'next'
 import Carousel from '@/components/carousel'
 import { AnimatedNumber } from '@/components/animated-number'
+import { Newsletter } from '@/components/newsletter'
+
+import { ChevronRightIcon } from '@heroicons/react/16/solid'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   description:
@@ -254,6 +256,7 @@ export default function Home() {
           {/* <PreviewSection /> */}
           {/* <FeatureSection /> */}
           {/* <BentoSection /> */}
+          <Newsletter />
         </div>
         {/* <DarkBentoSection /> */}
       </main>

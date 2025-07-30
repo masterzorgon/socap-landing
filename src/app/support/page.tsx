@@ -25,11 +25,10 @@ function Toast({ message, isVisible, onClose }: { message: string; isVisible: bo
   }, [isVisible, onClose]);
 
   return (
-    <div className={`fixed top-4 right-4 z-50 transition-opacity duration-300 ease-in-out ${
-      isVisible 
-        ? 'opacity-100' 
+    <div className={`fixed top-4 right-4 z-50 transition-opacity duration-300 ease-in-out ${isVisible
+        ? 'opacity-100'
         : 'opacity-0 pointer-events-none'
-    }`}>
+      }`}>
       <div className="bg-gray-900 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2">
         <div className="flex-shrink-0">
           <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
@@ -65,10 +64,10 @@ const copyToClipboard = async (url: string, setToast: (message: string) => void)
 const handleHeaderClick = (sectionId: string, router: any, setToast: (message: string) => void) => {
   const url = `${window.location.origin}/support#${sectionId}`;
   copyToClipboard(url, setToast);
-  
+
   // Update the URL without page reload
   router.push(`/support#${sectionId}`);
-  
+
   // Smooth scroll to the section
   const element = document.getElementById(sectionId);
   if (element) {
@@ -89,7 +88,7 @@ function Header() {
   )
 }
 
-function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; faqs: Array<{question: string; answer: string}> }) {
+function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; faqs: Array<{ question: string; answer: string }> }) {
   const router = useRouter();
   // Split FAQs into two arrays for left and right columns
   const leftFaqs = faqs.slice(0, Math.ceil(faqs.length / 2));
@@ -97,7 +96,7 @@ function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; f
 
   return (
     <Container className="mt-16">
-      <h2 
+      <h2
         id="faq"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('faq', router, setToast)}
@@ -184,10 +183,10 @@ function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; f
 
 function AuditsSection({ setToast }: { setToast: (message: string) => void }) {
   const router = useRouter();
-  
+
   return (
     <Container className="mt-16">
-      <h2 
+      <h2
         id="audits"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('audits', router, setToast)}
@@ -223,18 +222,18 @@ interface PointItem {
   description: string;
 }
 
-function PointsSection({ 
-  setToast, 
-  points 
-}: { 
+function PointsSection({
+  setToast,
+  points
+}: {
   setToast: (message: string) => void;
   points: PointItem[];
 }) {
   const router = useRouter();
-  
+
   return (
     <Container className="mt-16">
-      <h2 
+      <h2
         id="points"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('points', router, setToast)}
@@ -261,12 +260,59 @@ function PointsSection({
   )
 }
 
-function IntroSection({ setToast }: { setToast: (message: string) => void }) {
+interface BrowserItem {
+  id: number;
+  title: string;
+  icon: string;
+  extension: string;
+}
+
+function BrowserSupportSection({
+  setToast,
+  browserList
+}: {
+  setToast: (message: string) => void;
+  browserList: BrowserItem[];
+}) {
   const router = useRouter();
-  
+
   return (
     <Container className="mt-16">
-      <h2 
+      <h2
+        id="browser-support"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
+        onClick={() => handleHeaderClick('browser-support', router, setToast)}
+      >
+        Browser Support
+      </h2>
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
+        {browserList.map((browserOption) => (
+          <a href={browserOption.extension} target="_blank" rel="noopener noreferrer" className="">
+            <div key={browserOption.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-300">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                  <img src={browserOption.icon} alt={browserOption.title} className="w-full h-full object-contain rounded-full" />
+                </div>
+                <h3 className="ml-3 text-lg font-semibold text-gray-900">{browserOption.title}</h3>
+              </div>
+              <p className="text-gray-600 text-sm">
+                Use Social Capital on {browserOption.title} with the following extension.
+              </p>
+            </div>
+          </a>
+        ))}
+      </section>
+      <hr className="mt-16 border-t border-gray-300" />
+    </Container>
+  )
+}
+
+function IntroSection({ setToast }: { setToast: (message: string) => void }) {
+  const router = useRouter();
+
+  return (
+    <Container className="mt-16">
+      <h2
         id="introduction"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('introduction', router, setToast)}
@@ -275,7 +321,7 @@ function IntroSection({ setToast }: { setToast: (message: string) => void }) {
       </h2>
       <section>
         <p className="text-gray-600">
-          Social Capital is a decentralized exchange that allows users to trade 
+          Social Capital is a decentralized exchange that allows users to trade
         </p>
       </section>
       <hr className="mt-16 border-t border-gray-300" />
@@ -288,18 +334,18 @@ interface UserGuideItem {
   content: string;
 }
 
-function UserGuidesSection({ 
-  setToast, 
-  guides 
-}: { 
+function UserGuidesSection({
+  setToast,
+  guides
+}: {
   setToast: (message: string) => void;
   guides: UserGuideItem[];
 }) {
   const router = useRouter();
-  
+
   return (
     <Container className="mt-16">
-      <h2 
+      <h2
         id="user-guides"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('user-guides', router, setToast)}
@@ -330,18 +376,18 @@ interface ArchitectureItem {
   content: string;
 }
 
-function ArchitectureSection({ 
-  setToast, 
-  architectureItems 
-}: { 
+function ArchitectureSection({
+  setToast,
+  architectureItems
+}: {
   setToast: (message: string) => void;
   architectureItems: ArchitectureItem[];
 }) {
   const router = useRouter();
-  
+
   return (
     <Container className="mt-16">
-      <h2 
+      <h2
         id="architecture"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('architecture', router, setToast)}
@@ -369,14 +415,14 @@ function ArchitectureSection({
 
 function ContactSection({
   setToast,
-}: { 
+}: {
   setToast: (message: string) => void;
 }) {
   const router = useRouter();
 
   return (
     <Container className="mt-16">
-      <h2 
+      <h2
         id="contact"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('contact', router, setToast)}
@@ -501,6 +547,27 @@ export default function Support() {
     }
   ];
 
+  const browserList: BrowserItem[] = [
+    {
+      id: 1,
+      title: "Chrome",
+      icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/2048px-Google_Chrome_icon_%28February_2022%29.svg.png",
+      extension: "#"
+    },
+    {
+      id: 2,
+      title: "Firefox",
+      icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1200px-Firefox_logo%2C_2019.svg.png",
+      extension: "#"
+    },
+    {
+      id: 3,
+      title: "Brave",
+      icon: "https://upload.wikimedia.org/wikipedia/commons/5/51/Brave_icon_lionface.png",
+      extension: "#"
+    },
+  ];
+
   return (
     <main className="overflow-hidden">
       <GradientBackground />
@@ -525,13 +592,14 @@ export default function Support() {
       <FAQSection setToast={showToast} faqs={faqsData} />
       <AuditsSection setToast={showToast} />
       <PointsSection setToast={showToast} points={pointsData} />
+      <BrowserSupportSection setToast={showToast} browserList={browserList} />
       <ContactSection setToast={showToast} />
       <Footer />
-      
-      <Toast 
-        message={toast.message} 
-        isVisible={toast.isVisible} 
-        onClose={hideToast} 
+
+      <Toast
+        message={toast.message}
+        isVisible={toast.isVisible}
+        onClose={hideToast}
       />
     </main>
   )
