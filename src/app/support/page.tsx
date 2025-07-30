@@ -464,7 +464,7 @@ export default function Support() {
   // Define the guides data
   const userGuides: UserGuideItem[] = [
     {
-      title: "Token Creation",
+      title: "Creating a Market",
       content: "..."
     },
     {
