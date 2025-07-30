@@ -2,8 +2,10 @@
 
 @theme {
   --font-sans: Switzer, system-ui, sans-serif;
-
   --radius-4xl: 2rem;
+  
+  /* Add your primary color */
+  --color-primary: #fd3bb8;
 }
 
 @keyframes move-x {

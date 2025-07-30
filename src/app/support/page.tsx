@@ -32,7 +32,7 @@ function Toast({ message, isVisible, onClose }: { message: string; isVisible: bo
     }`}>
       <div className="bg-gray-900 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2">
         <div className="flex-shrink-0">
-          <svg className="h-5 w-5 text-[#fd3bb8]" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
         </div>
@@ -99,7 +99,7 @@ function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; f
     <Container className="mt-16">
       <h2 
         id="faq"
-        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('faq', router, setToast)}
       >
         Frequently Asked Questions
@@ -189,7 +189,7 @@ function AuditsSection({ setToast }: { setToast: (message: string) => void }) {
     <Container className="mt-16">
       <h2 
         id="audits"
-        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('audits', router, setToast)}
       >
         Audits and Contracts
@@ -198,15 +198,15 @@ function AuditsSection({ setToast }: { setToast: (message: string) => void }) {
         <div className="max-w-lg">
           <ul role="list" className="space-y-8 text-gray-600">
             <li className="flex gap-x-3">
-              <LockClosedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#fd3bb8]" />
+              <LockClosedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-primary" />
               <span>
-                <strong className="font-semibold text-gray-900">Double audited.</strong> Social Capital is audited by two independent auditors, <a href="https://www.certik.com/projects/social-capital" target="_blank" rel="noopener noreferrer" className="text-[#fd3bb8] hover:underline">Certik</a> and <a href="https://www.certik.com/projects/social-capital" target="_blank" rel="noopener noreferrer" className="text-[#fd3bb8] hover:underline">Certik</a>. The audit report is available <a href="https://www.certik.com/projects/social-capital" target="_blank" rel="noopener noreferrer" className="text-[#fd3bb8] hover:underline">here</a>.
+                <strong className="font-semibold text-gray-900">Double audited.</strong> Social Capital is audited by two independent auditors, <a href="https://www.certik.com/projects/social-capital" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Certik</a> and <a href="https://www.certik.com/projects/social-capital" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Certik</a>. The audit report is available <a href="https://www.certik.com/projects/social-capital" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">here</a>.
               </span>
             </li>
             <li className="flex gap-x-3">
-              <ServerIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#fd3bb8]" />
+              <ServerIcon aria-hidden="true" className="mt-1 size-5 flex-none text-primary" />
               <span>
-                <strong className="font-semibold text-gray-900">Open sourced.</strong> Social Capital is open sourced, and the code is available <a href="https://github.com/social-capital" target="_blank" rel="noopener noreferrer" className="text-[#fd3bb8] hover:underline">here</a>.
+                <strong className="font-semibold text-gray-900">Open sourced.</strong> Social Capital is open sourced, and the code is available <a href="https://github.com/social-capital" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">here</a>.
               </span>
             </li>
           </ul>
@@ -236,7 +236,7 @@ function PointsSection({
     <Container className="mt-16">
       <h2 
         id="points"
-        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('points', router, setToast)}
       >
         Our Points System
@@ -245,7 +245,7 @@ function PointsSection({
         {points.map((point) => (
           <div key={point.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
             <div className="flex items-center mb-4">
-              <div className="w-8 h-8 border-2 border-[#fd3bb8] rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-primary rounded-full flex items-center justify-center">
                 <span className="text-sm font-semibold">{point.id}</span>
               </div>
               <h3 className="ml-3 text-lg font-semibold text-gray-900">{point.title}</h3>
@@ -268,7 +268,7 @@ function IntroSection({ setToast }: { setToast: (message: string) => void }) {
     <Container className="mt-16">
       <h2 
         id="introduction"
-        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('introduction', router, setToast)}
       >
         Introduction
@@ -301,7 +301,7 @@ function UserGuidesSection({
     <Container className="mt-16">
       <h2 
         id="user-guides"
-        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('user-guides', router, setToast)}
       >
         User Guides
@@ -310,7 +310,7 @@ function UserGuidesSection({
         {guides.map((guide, index) => (
           <div key={guide.title}>
             <div className="flex items-center gap-2">
-              <StarIcon className="size-4 text-[#fd3bb8]" />
+              <StarIcon className="size-4 text-primary" />
               <h3 className="text-gray-800 my-4 font-medium text-lg">{guide.title}</h3>
             </div>
             <p className="mb-4">{guide.content}</p>
@@ -343,7 +343,7 @@ function ArchitectureSection({
     <Container className="mt-16">
       <h2 
         id="architecture"
-        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('architecture', router, setToast)}
       >
         Architecture
@@ -352,7 +352,7 @@ function ArchitectureSection({
         {architectureItems.map((item, index) => (
           <div key={item.title}>
             <div className="flex items-center gap-2">
-              <StarIcon className="size-4 text-[#fd3bb8]" />
+              <StarIcon className="size-4 text-primary" />
               <h3 className="text-gray-800 my-4 font-medium text-lg">{item.title}</h3>
             </div>
             <p className="mb-4">{item.content}</p>
@@ -378,14 +378,14 @@ function ContactSection({
     <Container className="mt-16">
       <h2 
         id="contact"
-        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-[#fd3bb8] transition-colors"
+        className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
         onClick={() => handleHeaderClick('contact', router, setToast)}
       >
         Contact Us
       </h2>
       <section>
         <p className="text-gray-600">
-          If you have any questions, please contact us at <a href="mailto:support@socialcapital.com" className="text-[#fd3bb8] hover:underline">support@socialcapital.com</a> or join our <a href="https://discord.gg/socialcapital" target="_blank" rel="noopener noreferrer" className="text-[#fd3bb8] hover:underline">Telegram</a>.
+          If you have any questions, please contact us at <a href="mailto:support@socialcapital.com" className="text-primary hover:underline">support@socialcapital.com</a> or join our <a href="https://discord.gg/socialcapital" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Telegram</a>.
         </p>
       </section>
       <hr className="mt-16 border-none" />
