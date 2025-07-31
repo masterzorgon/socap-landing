@@ -19,6 +19,8 @@ import { Newsletter } from '@/components/newsletter'
 
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
+import { LogoCloud } from '@/components/logo-cloud'
+import { Testimonials } from '@/components/testimonials'
 
 export const metadata: Metadata = {
   description:
@@ -123,7 +125,7 @@ function BentoSection() {
         Know more about your customers than they do.
       </Heading>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-20 lg:grid-cols-6 lg:grid-rows-2">
         <BentoCard
           eyebrow="Insight"
           title="Get perfect clarity"
@@ -229,38 +231,20 @@ function DarkBentoSection() {
   )
 }
 
-function PreviewSection() {
-  return (
-    <Preview />
-  )
-}
-
-function CarouselSection() {
-  return (
-    <div className="overflow-hidden w-screen mt-10">
-        <Carousel />
-    </div>
-  )
-}
-
 export default function Home() {
   return (
     <div className="overflow-hidden">
       <Hero />
       <main>
-        {/* <Container className="mt-10"> */}
-        {/* <LogoCloud /> */}
-        <CarouselSection />
-        {/* </Container> */}
+        <Container className="mt-10">
+          <Carousel />
+        </Container>
         <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
-          {/* <PreviewSection /> */}
-          {/* <FeatureSection /> */}
-          {/* <BentoSection /> */}
+          <Preview />
           <Newsletter />
+          <BentoSection />
         </div>
-        {/* <DarkBentoSection /> */}
       </main>
-      {/* <Testimonials /> */}
       <Footer />
     </div>
   )

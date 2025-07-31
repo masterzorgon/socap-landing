@@ -296,7 +296,7 @@ function BrowserSupportSection({
                 <h3 className="ml-3 text-lg font-semibold text-gray-900">{browserOption.title}</h3>
               </div>
               <p className="text-gray-600 text-sm">
-                Use Social Capital on {browserOption.title} with the following extension.
+                Use Social Capital with the {browserOption.title} browser extension.
               </p>
             </div>
           </a>
