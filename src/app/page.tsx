@@ -87,7 +87,7 @@ function Hero() {
             </Button>
             <p className="text-sm text-gray-950/75">
               Also available for other browsers.<br />
-              <a href="https://github.com/social-capital/social-capital" className="text-gray-950/75 underline hover:text-gray-950">Discover more</a>
+              <a href="/support#browser-support" className="text-gray-950/75 underline hover:text-gray-950">Discover more</a>
             </p>
           </div>
         </div>
