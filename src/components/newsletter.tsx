@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { Container } from "./container";
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
@@ -11,57 +12,59 @@ export function Newsletter() {
   }
 
   return (
-    <div className="py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="relative isolate overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-32 border border-blue-200">
-          <h2 className="mx-auto max-w-3xl text-center text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
-            Join the Social Capital newsletter
-          </h2>
-          <p className="mx-auto mt-6 max-w-lg text-center text-lg text-gray-600">
-            Stay up to date with the latest features and developments.
-          </p>
-          <form className="mx-auto mt-10 flex max-w-md gap-x-4">
-            <label htmlFor="email-address" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="email-address"
-              name="email"
-              type="email"
-              required
-              placeholder="Enter your email"
-              autoComplete="email"
-              className="min-w-0 flex-auto rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-blue-500/20 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6 border border-gray-200 shadow-sm"
-            />
-            <button
-              type="submit"
-              className="flex-none rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 transition-colors"
-            >
-              Notify me
-            </button>
-          </form>
-          <svg
-            viewBox="0 0 1024 1024"
-            aria-hidden="true"
-            className="absolute top-1/2 left-1/2 -z-10 size-256 -translate-x-1/2"
-          >
-            <circle r={512} cx={512} cy={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.3" />
-            <defs>
-              <radialGradient
-                r={1}
-                cx={0}
-                cy={0}
-                id="759c1415-0410-454c-8f7c-9a820de03641"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="translate(512 512) rotate(90) scale(512)"
+    <Container className="">
+      <div className="py-16 sm:py-24 my-16 sm:my-32">
+        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="relative isolate overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-32 border border-blue-200">
+            <h2 className="mx-auto max-w-3xl text-center text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+              Join the Social Capital newsletter
+            </h2>
+            <p className="mx-auto mt-6 max-w-lg text-center text-lg text-gray-600">
+              Stay up to date with the latest features and developments.
+            </p>
+            <form className="mx-auto mt-10 flex max-w-md gap-x-4">
+              <label htmlFor="email-address" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="email-address"
+                name="email"
+                type="email"
+                required
+                placeholder="Enter your email"
+                autoComplete="email"
+                className="min-w-0 flex-auto rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-blue-500/20 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6 border border-gray-200 shadow-sm"
+              />
+              <button
+                type="submit"
+                className="flex-none rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 transition-colors"
               >
-                <stop stopColor="#3B82F6" />
-                <stop offset={1} stopColor="#8B5CF6" stopOpacity={0} />
-              </radialGradient>
-            </defs>
-          </svg>
+                Notify me
+              </button>
+            </form>
+            <svg
+              viewBox="0 0 1024 1024"
+              aria-hidden="true"
+              className="absolute top-1/2 left-1/2 -z-10 size-256 -translate-x-1/2"
+            >
+              <circle r={512} cx={512} cy={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.3" />
+              <defs>
+                <radialGradient
+                  r={1}
+                  cx={0}
+                  cy={0}
+                  id="759c1415-0410-454c-8f7c-9a820de03641"
+                  gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(512 512) rotate(90) scale(512)"
+                >
+                  <stop stopColor="#3B82F6" />
+                  <stop offset={1} stopColor="#8B5CF6" stopOpacity={0} />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
   )
 }

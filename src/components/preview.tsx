@@ -63,7 +63,7 @@ export function Preview() {
         <section
             id="features"
             aria-label="Features for running your books"
-            className="relative overflow-hidden bg-white mt-20 mb-28"
+            className="relative overflow-hidden bg-white mt-20"
         >
             {/* <Image
                 className="absolute top-1/2 left-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"

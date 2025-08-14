@@ -19,8 +19,6 @@ import { Newsletter } from '@/components/newsletter'
 
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
-import { LogoCloud } from '@/components/logo-cloud'
-import { Testimonials } from '@/components/testimonials'
 
 export const metadata: Metadata = {
   description:
@@ -119,7 +117,7 @@ function FeatureSection() {
 
 function BentoSection() {
   return (
-    <Container>
+    <Container className="">
       <Subheading>Sales</Subheading>
       <Heading as="h3" className="mt-2 max-w-3xl">
         Know more about your customers than they do.
