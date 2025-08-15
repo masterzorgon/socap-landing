@@ -130,7 +130,7 @@ function BentoSection() {
           title="Token Creation"
           description="Users vote with SOL to fund launch. LP seeded below vote price for downside protection. Anti-sniper rules enforce fair access."
           graphic={
-            <div className="h-80 bg-[url(/screenshots/token-creation-preview.png)] " />
+            <div className="h-80 bg-[url(/screenshots/token-creation-preview.png)]" />
           }
           fade={['bottom']}
           className="max-lg:rounded-t-4xl lg:col-span-2 lg:rounded-bl-4xl lg:rounded-tl-4xl"

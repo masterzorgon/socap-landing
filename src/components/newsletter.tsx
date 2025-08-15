@@ -4,12 +4,55 @@ import { useState } from "react";
 import { Container } from "./container";
 
 export function Newsletter() {
-  const [email, setEmail] = useState("");
+  const [isSending, setIsSending] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(email);
-  }
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // const handleNewsletterSignup = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+
+  //   setIsSending(true);
+
+  //   const form = event.target as HTMLFormElement;
+  //   const emailInput = form.email as HTMLInputElement;
+  //   const email = emailInput.value;
+
+  //   if (!validateEmail(email)) {
+  //     toast.error("Invalid email format");
+  //     setIsSending(false);
+  //     return;
+  //   }
+
+  //   const url = "/api/newsletter";
+
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ email }),
+  //     });
+
+  //     const result = await response.json();
+  //     console.log("RESULT", result);
+
+  //     if (response.ok) {
+  //       toast.success("Successfully signed up!");
+  //     } else {
+  //       toast.error(result.error || "An error occurred. Try again later.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Request failed:", error);
+  //     toast.error("An error occurred. Try again later.");
+  //   } finally {
+  //     setIsSending(false);
+  //     emailInput.value = '';
+  //   }
+  // };
 
   return (
     <Container className="">
@@ -17,7 +60,7 @@ export function Newsletter() {
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative isolate overflow-hidden bg-gradient-to-br from-primary/10 to-slate-100 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-32 border border-gray-200">
             <h2 className="mx-auto max-w-3xl text-center text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-              Join the Social Capital newsletter
+              Join the Social Capital Newsletter
             </h2>
             <p className="mx-auto mt-6 max-w-lg text-center text-lg text-slate-600">
               Stay up to date with the latest features and developments.
@@ -39,7 +82,7 @@ export function Newsletter() {
                 type="submit"
                 className="pointer-cursor flex-none rounded-md bg-gray-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors"
               >
-                Notify me
+                Sign up
               </button>
             </form>
             <svg

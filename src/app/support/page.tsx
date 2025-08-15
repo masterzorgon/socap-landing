@@ -10,60 +10,23 @@ import { ChevronRightIcon, MinusSmallIcon, PlusSmallIcon } from '@heroicons/reac
 import { LockClosedIcon, ServerIcon, StarIcon } from '@heroicons/react/24/solid';
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState, useEffect } from "react"
-
-// Toast component with smooth animations
-function Toast({ message, isVisible, onClose }: { message: string; isVisible: boolean; onClose: () => void }) {
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        onClose();
-      }, 3000); // Auto-hide after 3 seconds
-
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible, onClose]);
-
-  return (
-    <div className={`fixed top-4 right-4 z-50 transition-opacity duration-300 ease-in-out ${isVisible
-        ? 'opacity-100'
-        : 'opacity-0 pointer-events-none'
-      }`}>
-      <div className="bg-gray-900 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2">
-        <div className="flex-shrink-0">
-          <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-          </svg>
-        </div>
-        <span className="text-sm font-medium">{message}</span>
-        <button
-          onClick={onClose}
-          className="flex-shrink-0 ml-2 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
-        >
-          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  );
-}
+import { useToast } from "@/components/toast-provider"
 
 // Utility function to copy URL to clipboard
-const copyToClipboard = async (url: string, setToast: (message: string) => void) => {
+const copyToClipboard = async (url: string, showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void) => {
   try {
     await navigator.clipboard.writeText(url);
-    setToast("URL copied to clipboard!");
+    showToast("URL copied to clipboard!", "success");
   } catch (err) {
     console.error('Failed to copy to clipboard:', err);
-    setToast("Failed to copy URL to clipboard");
+    showToast("Failed to copy URL to clipboard", "error");
   }
 };
 
 // Utility function to handle header clicks
-const handleHeaderClick = (sectionId: string, router: any, setToast: (message: string) => void) => {
+const handleHeaderClick = (sectionId: string, router: any, showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void) => {
   const url = `${window.location.origin}/support#${sectionId}`;
-  copyToClipboard(url, setToast);
+  copyToClipboard(url, showToast);
 
   // Update the URL without page reload
   router.push(`/support#${sectionId}`);
@@ -88,8 +51,10 @@ function Header() {
   )
 }
 
-function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; faqs: Array<{ question: string; answer: string }> }) {
+function FAQSection({ faqs }: { faqs: Array<{ question: string; answer: string }> }) {
   const router = useRouter();
+  const { showToast } = useToast();
+  
   // Split FAQs into two arrays for left and right columns
   const leftFaqs = faqs.slice(0, Math.ceil(faqs.length / 2));
   const rightFaqs = faqs.slice(Math.ceil(faqs.length / 2));
@@ -99,7 +64,7 @@ function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; f
       <h2
         id="faq"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => handleHeaderClick('faq', router, setToast)}
+        onClick={() => handleHeaderClick('faq', router, showToast)}
       >
         Frequently Asked Questions
       </h2>
@@ -181,7 +146,7 @@ function FAQSection({ setToast, faqs }: { setToast: (message: string) => void; f
   )
 }
 
-function AuditsSection({ setToast }: { setToast: (message: string) => void }) {
+function AuditsSection({ showToast }: { showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void }) {
   const router = useRouter();
 
   return (
@@ -189,7 +154,7 @@ function AuditsSection({ setToast }: { setToast: (message: string) => void }) {
       <h2
         id="audits"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => handleHeaderClick('audits', router, setToast)}
+        onClick={() => handleHeaderClick('audits', router, showToast)}
       >
         Audits and Contracts
       </h2>
@@ -223,10 +188,10 @@ interface PointItem {
 }
 
 function PointsSection({
-  setToast,
+  showToast,
   points
 }: {
-  setToast: (message: string) => void;
+  showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void;
   points: PointItem[];
 }) {
   const router = useRouter();
@@ -236,7 +201,7 @@ function PointsSection({
       <h2
         id="points"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => handleHeaderClick('points', router, setToast)}
+        onClick={() => handleHeaderClick('points', router, showToast)}
       >
         Our Points System
       </h2>
@@ -268,10 +233,10 @@ interface BrowserItem {
 }
 
 function BrowserSupportSection({
-  setToast,
+  showToast,
   browserList
 }: {
-  setToast: (message: string) => void;
+  showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void;
   browserList: BrowserItem[];
 }) {
   const router = useRouter();
@@ -281,7 +246,7 @@ function BrowserSupportSection({
       <h2
         id="browser-support"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => handleHeaderClick('browser-support', router, setToast)}
+        onClick={() => handleHeaderClick('browser-support', router, showToast)}
       >
         Browser Support
       </h2>
@@ -307,7 +272,7 @@ function BrowserSupportSection({
   )
 }
 
-function IntroSection({ setToast }: { setToast: (message: string) => void }) {
+function IntroSection({ showToast }: { showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void }) {
   const router = useRouter();
 
   return (
@@ -315,7 +280,7 @@ function IntroSection({ setToast }: { setToast: (message: string) => void }) {
       <h2
         id="introduction"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => handleHeaderClick('introduction', router, setToast)}
+        onClick={() => handleHeaderClick('introduction', router, showToast)}
       >
         Introduction
       </h2>
@@ -335,10 +300,10 @@ interface UserGuideItem {
 }
 
 function UserGuidesSection({
-  setToast,
+  showToast,
   guides
 }: {
-  setToast: (message: string) => void;
+  showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void;
   guides: UserGuideItem[];
 }) {
   const router = useRouter();
@@ -348,7 +313,7 @@ function UserGuidesSection({
       <h2
         id="user-guides"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => handleHeaderClick('user-guides', router, setToast)}
+        onClick={() => handleHeaderClick('user-guides', router, showToast)}
       >
         User Guides
       </h2>
@@ -377,10 +342,10 @@ interface ArchitectureItem {
 }
 
 function ArchitectureSection({
-  setToast,
+  showToast,
   architectureItems
 }: {
-  setToast: (message: string) => void;
+  showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void;
   architectureItems: ArchitectureItem[];
 }) {
   const router = useRouter();
@@ -390,7 +355,7 @@ function ArchitectureSection({
       <h2
         id="architecture"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => handleHeaderClick('architecture', router, setToast)}
+        onClick={() => handleHeaderClick('architecture', router, showToast)}
       >
         Architecture
       </h2>
@@ -414,9 +379,9 @@ function ArchitectureSection({
 }
 
 function ContactSection({
-  setToast,
+  showToast,
 }: {
-  setToast: (message: string) => void;
+  showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void;
 }) {
   const router = useRouter();
 
@@ -425,7 +390,7 @@ function ContactSection({
       <h2
         id="contact"
         className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => handleHeaderClick('contact', router, setToast)}
+        onClick={() => handleHeaderClick('contact', router, showToast)}
       >
         Contact Us
       </h2>
@@ -440,15 +405,7 @@ function ContactSection({
 }
 
 export default function Support() {
-  const [toast, setToast] = useState({ message: '', isVisible: false });
-
-  const showToast = (message: string) => {
-    setToast({ message, isVisible: true });
-  };
-
-  const hideToast = () => {
-    setToast({ message: '', isVisible: false });
-  };
+  const { showToast } = useToast();
 
   const faqsData = [
     {
@@ -586,21 +543,15 @@ export default function Support() {
       </Container>
 
       <Header />
-      <IntroSection setToast={showToast} />
-      <UserGuidesSection setToast={showToast} guides={userGuides} />
-      <ArchitectureSection setToast={showToast} architectureItems={architectureItems} />
-      <FAQSection setToast={showToast} faqs={faqsData} />
-      <AuditsSection setToast={showToast} />
-      <PointsSection setToast={showToast} points={pointsData} />
-      <BrowserSupportSection setToast={showToast} browserList={browserList} />
-      <ContactSection setToast={showToast} />
+      <IntroSection showToast={showToast} />
+      <UserGuidesSection showToast={showToast} guides={userGuides} />
+      <ArchitectureSection showToast={showToast} architectureItems={architectureItems} />
+      <FAQSection faqs={faqsData} />
+      <AuditsSection showToast={showToast} />
+      <PointsSection showToast={showToast} points={pointsData} />
+      <BrowserSupportSection showToast={showToast} browserList={browserList} />
+      <ContactSection showToast={showToast} />
       <Footer />
-
-      <Toast
-        message={toast.message}
-        isVisible={toast.isVisible}
-        onClose={hideToast}
-      />
     </main>
   )
 }
