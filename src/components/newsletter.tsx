@@ -2,57 +2,59 @@
 
 import { useState } from "react";
 import { Container } from "./container";
+import { useToast } from "./toast-provider";
 
 export function Newsletter() {
   const [isSending, setIsSending] = useState<boolean>(false);
+  const { showToast } = useToast();
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  // const handleNewsletterSignup = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
+  const handleNewsletterSignup = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  //   setIsSending(true);
+    setIsSending(true);
 
-  //   const form = event.target as HTMLFormElement;
-  //   const emailInput = form.email as HTMLInputElement;
-  //   const email = emailInput.value;
+    const form = event.target as HTMLFormElement;
+    const emailInput = form.email as HTMLInputElement;
+    const email = emailInput.value;
 
-  //   if (!validateEmail(email)) {
-  //     toast.error("Invalid email format");
-  //     setIsSending(false);
-  //     return;
-  //   }
+    if (!validateEmail(email)) {
+      showToast("Invalid email format", "error");
+      setIsSending(false);
+      return;
+    }
 
-  //   const url = "/api/newsletter";
+    const url = "/api/newsletter";
 
-  //   try {
-  //     const response = await fetch(url, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ email }),
-  //     });
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
 
-  //     const result = await response.json();
-  //     console.log("RESULT", result);
+      const result = await response.json();
+      console.log("RESULT", result);
 
-  //     if (response.ok) {
-  //       toast.success("Successfully signed up!");
-  //     } else {
-  //       toast.error(result.error || "An error occurred. Try again later.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Request failed:", error);
-  //     toast.error("An error occurred. Try again later.");
-  //   } finally {
-  //     setIsSending(false);
-  //     emailInput.value = '';
-  //   }
-  // };
+      if (response.ok) {
+        showToast("Successfully signed up!", "success");
+      } else {
+        showToast(result.error || "An error occurred. Try again later.", "error");
+      }
+    } catch (error) {
+      console.error("Request failed:", error);
+      showToast("An error occurred. Try again later.", "error");
+    } finally {
+      setIsSending(false);
+      emailInput.value = '';
+    }
+  };
 
   return (
     <Container className="">
@@ -65,7 +67,7 @@ export function Newsletter() {
             <p className="mx-auto mt-6 max-w-lg text-center text-lg text-slate-600">
               Stay up to date with the latest features and developments.
             </p>
-            <form className="mx-auto mt-10 flex max-w-md gap-x-4">
+            <form className="mx-auto mt-10 flex max-w-md gap-x-4" onSubmit={handleNewsletterSignup}>
               <label htmlFor="email-address" className="sr-only">
                 Email address
               </label>
@@ -76,13 +78,15 @@ export function Newsletter() {
                 required
                 placeholder="Enter your email"
                 autoComplete="email"
-                className="min-w-0 flex-auto rounded-md bg-white px-3.5 py-2 text-base text-slate-900 outline-1 -outline-offset-1 outline-primary/20 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary/50 sm:text-sm/6 border border-slate-200 shadow-sm"
+                disabled={isSending}
+                className="min-w-0 flex-auto rounded-md bg-white px-3.5 py-2 text-base text-slate-900 outline-1 -outline-offset-1 outline-primary/20 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary/50 sm:text-sm/6 border border-slate-200 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <button
                 type="submit"
-                className="pointer-cursor flex-none rounded-md bg-gray-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors"
+                disabled={isSending}
+                className="pointer-cursor flex-none rounded-md bg-gray-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign up
+                {isSending ? 'Signing up...' : 'Sign up'}
               </button>
             </form>
             <svg

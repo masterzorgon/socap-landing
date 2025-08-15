@@ -14,7 +14,7 @@ import {
   import { Tailwind } from "@react-email/tailwind";
   import * as React from "react";
   
-  const ConfirmationNewsLetterSignup = () => {
+  const NewsletterSuubscribe = () => {
     const previewText = "Welcome to the La Playa Mexican Cafe Newsletter";
   
     return (
@@ -58,5 +58,5 @@ import {
     );
   };
   
-  export default ConfirmationNewsLetterSignup;
+  export default NewsletterSuubscribe;
   
