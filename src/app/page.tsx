@@ -117,35 +117,51 @@ function FeatureSection() {
 
 function BentoSection() {
   return (
-    <Container className="">
-      <Subheading>Sales</Subheading>
+    <Container>
+      <Subheading>Features</Subheading>
       <Heading as="h3" className="mt-2 max-w-3xl">
-        Know more about your customers than they do.
+        A Whole New Asset Class.
       </Heading>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-20 lg:grid-cols-6 lg:grid-rows-2">
+      {/* bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat */}
+      <div className="sm:mb-[-500px] mt-10 grid grid-cols-1 gap-4 sm:mt-20 lg:grid-cols-6 lg:grid-rows-2">
         <BentoCard
-          eyebrow="Insight"
-          title="Get perfect clarity"
-          description="Radiant uses social engineering to build a detailed financial picture of your leads. Know their budget, compensation package, social security number, and more."
+          eyebrow="Step 1"
+          title="Token Creation"
+          description="Users vote with SOL to fund launch. LP seeded below vote price for downside protection. Anti-sniper rules enforce fair access."
           graphic={
-            <div className="h-80 bg-[url(/screenshots/profile.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+            <div className="h-80 bg-[url(/screenshots/token-creation-preview.png)] " />
           }
           fade={['bottom']}
-          className="max-lg:rounded-t-4xl lg:col-span-3 lg:rounded-tl-4xl"
+          className="max-lg:rounded-t-4xl lg:col-span-2 lg:rounded-bl-4xl lg:rounded-tl-4xl"
         />
+
+        {/* bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat */}
         <BentoCard
-          eyebrow="Analysis"
-          title="Undercut your competitors"
-          description="With our advanced data mining, you’ll know which companies your leads are talking to and exactly how much they’re being charged."
+          eyebrow="Step 2"
+          title="Spot Token Launch"
+          description="SOL/token LP goes live. Presale wallets get early access. Spot traders earn 25% of perp fees. LP curve supports both stability and upside."
           graphic={
-            <div className="absolute inset-0 bg-[url(/screenshots/competitors.png)] bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat" />
+            <div className="absolute inset-0 bg-[url(/screenshots/spot-preview.png)]" />
           }
           fade={['bottom']}
-          className="lg:col-span-3 lg:rounded-tr-4xl"
+          className="lg:col-span-2"
         />
+
+        {/* bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat */}
         <BentoCard
-          eyebrow="Speed"
+          eyebrow="Step 3"
+          title="Trade Perps with Leverage"
+          description="Perps built with D8X. Funding via internal TWAP, no oracles needed. Trade sentiment with leverage. Each token gets its own market."
+          graphic={
+            <div className="absolute inset-0 bg-[url(/screenshots/perps-preview.png)]" />
+          }
+          fade={['bottom']}
+          className="lg:col-span-2 lg:rounded-br-4xl lg:rounded-tr-4xl"
+        />
+
+        {/* <BentoCard
+          eyebrow="Leverage"
           title="Built for power users"
           description="It’s never been faster to cold email your entire contact list using our streamlined keyboard shortcuts."
           graphic={
@@ -168,7 +184,7 @@ function BentoSection() {
           description="Radiant helps you sell in locations currently under international embargo."
           graphic={<Map />}
           className="max-lg:rounded-b-4xl lg:col-span-2 lg:rounded-br-4xl"
-        />
+        /> */}
       </div>
     </Container>
   )
