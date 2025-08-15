@@ -48,7 +48,7 @@ import {
               <Text className="text-[#666666] text-[12px] leading-[24px]">
                 If you were not expecting this invitation, you can ignore this email. If
                 you are concerned about your account's safety, please reply to
-                this email to get in touch with us at Laplayamain@gmail.com.
+                this email or email support@socapital.trade to get in touch with us.
                 If you would like to unsubscribe from our email list, please do so on our website: https://socaputal.trade/unsubscribe
               </Text>
             </Container>
