@@ -11,16 +11,14 @@ export async function POST(request: NextRequest) {
     const audience = process.env.NEXT_PUBLIC_RESEND_AUDIENCE_KEY!;
 
     try {
-        // add signee to the audience
         await resend.contacts.create({
             email,
             unsubscribed: false,
             audienceId: audience
         });
 
-        // send confirmation email to signee
         const { data: confirmData } = await resend.emails.send({
-            from: ""
+            from: "hello@socapital.trade",
             to: email,
             subject: "Welcome to the Social Capital Newsletter!",
             react: NewsletterSubscribe(),

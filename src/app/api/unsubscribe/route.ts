@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
    const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
    const audience = process.env.NEXT_PUBLIC_RESEND_AUDIENCE_KEY!;
 
-   // Email validation using a simple regex pattern
    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
    if (!emailRegex.test(email as string)) {
       console.error("Error: Invalid email format.");
@@ -17,7 +16,6 @@ export async function POST(request: NextRequest) {
    }
 
    try {
-      // Check if email exists in the audience
       const { data: contactList } = await resend.contacts.list({
          audienceId: audience,
       });
@@ -28,13 +26,11 @@ export async function POST(request: NextRequest) {
          return NextResponse.json({ error: "Email not found" }, { status: 404 });
       }
 
-      // Remove user from audience
       const { data } = await resend.contacts.remove({
          email: email as string,
          audienceId: audience
       });
 
-      // Send confirmation email to user
       await resend.emails.send({
          from: "hello@socapital.trade",
          to: [email as string],

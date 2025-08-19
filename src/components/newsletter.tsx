@@ -45,7 +45,7 @@ export function Newsletter() {
       if (response.ok) {
         showToast("Successfully signed up!", "success");
       } else {
-        showToast(result.error || "An error occurred. Try again later.", "error");
+        showToast("An error occurred. Try again later.", "error");
       }
     } catch (error) {
       console.error("Request failed:", error);

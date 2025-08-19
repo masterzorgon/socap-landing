@@ -11,8 +11,7 @@ const stats = [
   { id: 3, name: '@so_capital',   stat: '24.57K', pfp: 'https://pbs.twimg.com/profile_images/1748108741503803392/EmT4yP6S_400x400.jpg', amount: '3.22%', changeType: 'decrease', market: 'Perps' },
 ]
 
-// duplicate once for seamless loop
-const loopStats = [...stats, ...stats]
+const loopStats = [...stats, ...stats, ...stats]
 
 type Item = (typeof stats)[number]
 
@@ -59,12 +58,9 @@ function CarouselCard({ item }: { item: Item }) {
 }
 
 export default function Carousel() {
-  // tune speed by changing duration; longer = slower
-  const duration = 25
+  const duration = 35
 
   return (
-    // if your layout is constrained, wrap this div with a full-bleed container:
-    // <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden">
     <div
       className="
         relative w-full overflow-hidden bg-white
@@ -78,8 +74,8 @@ export default function Carousel() {
       "
     >
       <motion.div
-        className="flex w-max"       // width fits content, not a percentage guess
-        animate={{ x: ['0%', '-50%'] }} // move one full set width to the left
+        className="flex w-max"     
+        animate={{ x: ['0%', '-50%'] }} 
         transition={{ duration, ease: 'linear', repeat: Infinity }}
       >
         {loopStats.map((item, idx) => (
