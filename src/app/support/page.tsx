@@ -369,7 +369,7 @@ function ContactSection({
       </h2>
       <section>
         <p className="text-gray-600">
-          If you have any questions, please contact us at <a href="mailto:support@socialcapital.com" className="text-primary hover:underline">support@socialcapital.com</a> or join our <a href="https://discord.gg/socialcapital" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Telegram</a>.
+          If you have any questions, please contact us at <a href="mailto:support@socapital.trade" className="text-primary hover:underline">support@socialcapital.com</a> or join our <a href="https://t.me/socapitaltrade" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Telegram</a>.
         </p>
       </section>
       <hr className="mt-16 border-none" />
