@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Container } from "@/components/container";
 import { handleSectionClick } from "@/utils/navigation";
 import { useToast } from "../toast-provider";

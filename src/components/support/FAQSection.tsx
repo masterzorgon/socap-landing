@@ -55,9 +55,9 @@ export function FAQSection() {
             >
                 Frequently Asked Questions
             </h2>
-            <section className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
-                <div>
-                    <dl className="divide-y divide-gray-200">
+            <section className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 divide-y divide-gray-200 lg:divide-y-0 divide-dashed">
+                <div className="pb-4 lg:pb-0">
+                    <dl className="divide-y divide-gray-200 divide-dashed">
                         {leftFaqs.map((faq) => (
                             <Disclosure
                                 key={faq.question}
@@ -91,8 +91,8 @@ export function FAQSection() {
                     </dl>
                 </div>
 
-                <div>
-                    <dl className="divide-y divide-gray-200">
+                <div className="pt-5 lg:pt-0">
+                    <dl className="divide-y divide-gray-200 divide-dashed">
                         {rightFaqs.map((faq) => (
                             <Disclosure
                                 key={faq.question}
