@@ -9,34 +9,28 @@ import { Container } from './container'
 import screenshotExpenses from '../../public/screenshots/competitors.png'
 import screenshotPayroll from '../../public/screenshots/competitors.png'
 import screenshotReporting from '../../public/screenshots/competitors.png'
-import screenshotVatReturns from '../../public/screenshots/competitors.png'
 
 const features = [
     {
-        title: 'Seed a Market',
+        title: 'LP into Markets',
         description:
-            "Keep track of everyone's salaries and whether or not they've been paid. Direct deposit not supported.",
+            'Provide liquidity to new profile markets and earn a share of trading fees. Seed positions early to earn a share of trading fees for the markets you back.',
         image: screenshotPayroll,
     },
     {
         title: 'Trade Spot Assets',
         description:
-            "All of your receipts organized into one place, as long as you don't mind typing in the data by hand.",
+            'Buy and sell profile tokens directly in the spot market. Get exposure to social sentiment around your favorite Twitter (X) personalities.',
         image: screenshotExpenses,
-    },
-    {
-        title: 'Creating the Perp Market',
-        description:
-            "We only sell our software to companies who don't deal with VAT at all, so technically we do all the VAT stuff they need.",
-        image: screenshotVatReturns,
     },
     {
         title: 'Trading Perps',
         description:
-            'Easily export your data into an Excel spreadsheet where you can do whatever the hell you want with it.',
+            'Go long or short with leverage on any profile token. Speculate on sentiment swings as Twitter (X) personalities rise and fall in popularity.',
         image: screenshotReporting,
     },
 ]
+
 
 export function Preview() {
     let [tabOrientation, setTabOrientation] = useState<'horizontal' | 'vertical'>(
@@ -67,11 +61,11 @@ export function Preview() {
             <Container className="relative">
                 <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
                     <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
-                        Everything you need to run your books.
+                        Retire your bloodline by trading social sentiment.
                     </h2>
                     <p className="mt-6 text-lg tracking-tight text-gray-600">
-                        Well everything you need if you aren't that picky about minor
-                        details like tax compliance.
+                        LP into new profiles, buy and sell spot tokens, or go long and short with leverage.
+                        Everything you need to speculate on social sentiment in one place.
                     </p>
                 </div>
                 <TabGroup
