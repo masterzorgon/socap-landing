@@ -39,31 +39,32 @@ export function BrowserSupportSection() {
 
     return (
         <Container className="mt-16">
-            <h2
-                id="browser-support"
-                className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-                onClick={() => handleSectionClick('browser-support', router, showToast)}
-            >
-                Browser Support
-            </h2>
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
-                {browserList.map((browserOption) => (
-                    <a href={browserOption.extension} target="_blank" rel="noopener noreferrer" className="">
-                        <div key={browserOption.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-300">
-                            <div className="flex items-center mb-4">
-                                <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                                    <img src={browserOption.icon} alt={browserOption.title} className="w-full h-full object-contain rounded-full" />
+            <section id="browser-support" className="scroll-mt-24">
+                <h2
+                    className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
+                    onClick={() => handleSectionClick('browser-support', router, showToast)}
+                >
+                    Browser Support
+                </h2>
+                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
+                    {browserList.map((browserOption) => (
+                        <a href={browserOption.extension} target="_blank" rel="noopener noreferrer" className="">
+                            <div key={browserOption.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-300">
+                                <div className="flex items-center mb-4">
+                                    <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                                        <img src={browserOption.icon} alt={browserOption.title} className="w-full h-full object-contain rounded-full" />
+                                    </div>
+                                    <h3 className="ml-3 text-lg font-semibold text-gray-900">{browserOption.title}</h3>
                                 </div>
-                                <h3 className="ml-3 text-lg font-semibold text-gray-900">{browserOption.title}</h3>
+                                <p className="text-gray-600 text-sm">
+                                    Use Social Capital with the {browserOption.title} browser extension.
+                                </p>
                             </div>
-                            <p className="text-gray-600 text-sm">
-                                Use Social Capital with the {browserOption.title} browser extension.
-                            </p>
-                        </div>
-                    </a>
-                ))}
+                        </a>
+                    ))}
+                </section>
+                <hr className="mt-16 border-t border-gray-300" />
             </section>
-            <hr className="mt-16 border-t border-gray-300" />
         </Container>
     )
 }

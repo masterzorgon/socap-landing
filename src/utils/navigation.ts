@@ -17,6 +17,6 @@ export const handleSectionClick = (
   // Smooth scroll to the section
   const element = document.getElementById(sectionId);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 };

@@ -34,28 +34,29 @@ export function UserGuidesSection() {
 
     return (
         <Container className="mt-16">
-            <h2
-                id="user-guides"
-                className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-                onClick={() => handleSectionClick('user-guides', router, showToast)}
-            >
-                User Guides
-            </h2>
-            <section>
-                {guides.map((guide, index) => (
-                    <div key={guide.title}>
-                        <div className="flex items-center gap-2">
-                            <StarIcon className="size-4 text-primary" />
-                            <h3 className="text-gray-800 my-4 font-medium text-lg">{guide.title}</h3>
+            <section id="user-guides" className="scroll-mt-24">
+                <h2
+                    className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
+                    onClick={() => handleSectionClick('user-guides', router, showToast)}
+                >
+                    User Guides
+                </h2>
+                <div>
+                    {guides.map((guide, index) => (
+                        <div key={guide.title}>
+                            <div className="flex items-center gap-2">
+                                <StarIcon className="size-4 text-primary" />
+                                <h3 className="text-gray-800 my-4 font-medium text-lg">{guide.title}</h3>
+                            </div>
+                            <p className="mb-4">{guide.content}</p>
+                            {index < guides.length - 1 && (
+                                <hr className="border-t border-gray-300 border-dashed" />
+                            )}
                         </div>
-                        <p className="mb-4">{guide.content}</p>
-                        {index < guides.length - 1 && (
-                            <hr className="border-t border-gray-300 border-dashed" />
-                        )}
-                    </div>
-                ))}
+                    ))}
+                </div>
+                <hr className="mt-16 border-t border-gray-300" />
             </section>
-            <hr className="mt-16 border-t border-gray-300" />
         </Container>
     )
 }

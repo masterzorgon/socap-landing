@@ -50,7 +50,7 @@ function NavigationMenu({ showToast }: { showToast: (message: string, type?: 'su
 	useEffect(() => {
 		const handleScroll = () => {
 			const sections = navigationItems.map(item => item.id);
-			const scrollPosition = window.scrollY + 100; 
+			const scrollPosition = window.scrollY + 100;
 
 			for (let i = sections.length - 1; i >= 0; i--) {
 				const element = document.getElementById(sections[i]);
@@ -106,8 +106,49 @@ function Header() {
 export default function Support() {
 	const { showToast } = useToast();
 
+	// return (
+	// 	<main className="overflow-hidden">
+	// 		<GradientBackground />
+	// 		<Container>
+	// 			<Navbar
+	// 				banner={
+	// 					<Link
+	// 						href="/blog/radiant-raises-100m-series-a-from-tailwind-ventures"
+	// 						className="flex items-center gap-1 rounded-full bg-fuchsia-950/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-fuchsia-950/30"
+	// 					>
+	// 						Open Beta Is Now Live!
+	// 						<ChevronRightIcon className="size-4" />
+	// 					</Link>
+	// 				}
+	// 			/>
+	// 		</Container>
+
+	// 		<div className="relative">
+	// 			<div className="lg:mx-72 border-2 border-green-500">
+	// 				<Header />
+	// 				<IntroSection />
+	// 				<UserGuidesSection />
+	// 				<ArchitectureSection />
+	// 				<FAQSection />
+	// 				<AuditsSection />
+	// 				<PointsSection />
+	// 				<BrowserSupportSection />
+	// 				<ContactSection />
+	// 			</div>
+
+	// 			<div className="hidden lg:block fixed left-6 top-54 bottom-32 w-56 border-2 border-purple-500">
+	// 				<div className="sticky top-6 h-fit">
+	// 					<NavigationMenu showToast={showToast} />
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 		<Footer />
+	// 	</main>
+	// )
+
 	return (
-		<main className="overflow-hidden">
+		// was: <main className="overflow-hidden">
+		<main className="overflow-x-hidden">
 			<GradientBackground />
 			<Container>
 				<Navbar
@@ -123,27 +164,29 @@ export default function Support() {
 				/>
 			</Container>
 
+			{/* This wrapper establishes the vertical boundary for the sticky sidebar */}
 			<div className="relative">
-				<div className="lg:mx-72 border-2 border-green-500">
-					<Header />
-					<IntroSection />
-					<UserGuidesSection />
-					<ArchitectureSection />
-					<FAQSection />
-					<AuditsSection />
-					<PointsSection />
-					<BrowserSupportSection />
-					<ContactSection />
-				</div>
+				<div className="mx-auto max-w-7xl px-6 lg:px-8 grid lg:grid-cols-[14rem_1fr] gap-8">
+					<aside className="hidden lg:block top-54 border-2 border-purple-500">
+						<div className="sticky top-56 h-fit">
+							<NavigationMenu showToast={showToast} />
+						</div>
+					</aside>
 
-				<div className="hidden lg:block fixed left-6 top-0 bottom-0 w-56 border-2 border-purple-500">
-					<div className="sticky top-6 h-fit transform translate-y-5/9">
-						<NavigationMenu showToast={showToast} />
+					<div className="lg:mr-72">
+						<Header />
+						<IntroSection />
+						<UserGuidesSection />
+						<ArchitectureSection />
+						<FAQSection />
+						<AuditsSection />
+						<PointsSection />
+						<BrowserSupportSection />
+						<ContactSection />
 					</div>
 				</div>
 			</div>
-
 			<Footer />
 		</main>
-	)
+	);
 }

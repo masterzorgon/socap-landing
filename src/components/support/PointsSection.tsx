@@ -38,29 +38,30 @@ export function PointsSection() {
 
     return (
         <Container className="mt-16">
-            <h2
-                id="points"
-                className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
-                onClick={() => handleSectionClick('points', router, showToast)}
-            >
-                Our Points System
-            </h2>
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
-                {points.map((point) => (
-                    <div key={point.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-                        <div className="flex items-center mb-4">
-                            <div className="w-8 h-8 border-2 border-primary rounded-full flex items-center justify-center">
-                                <span className="text-sm font-semibold">{point.id}</span>
+            <section id="points" className="scroll-mt-24">
+                <h2
+                    className="text-2xl font-medium tracking-tight text-gray-800 mb-8 cursor-pointer hover:text-primary transition-colors"
+                    onClick={() => handleSectionClick('points', router, showToast)}
+                >
+                    Our Points System
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
+                    {points.map((point) => (
+                        <div key={point.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                            <div className="flex items-center mb-4">
+                                <div className="w-8 h-8 border-2 border-primary rounded-full flex items-center justify-center">
+                                    <span className="text-sm font-semibold">{point.id}</span>
+                                </div>
+                                <h3 className="ml-3 text-lg font-semibold text-gray-900">{point.title}</h3>
                             </div>
-                            <h3 className="ml-3 text-lg font-semibold text-gray-900">{point.title}</h3>
+                            <p className="text-gray-600 text-sm">
+                                {point.description}
+                            </p>
                         </div>
-                        <p className="text-gray-600 text-sm">
-                            {point.description}
-                        </p>
-                    </div>
-                ))}
+                    ))}
+                </div>
+                <hr className="mt-16 border-t border-gray-300" />
             </section>
-            <hr className="mt-16 border-t border-gray-300" />
         </Container>
     )
 }
