@@ -5,34 +5,34 @@ import NewsletterSubscribe from "@/emails/NewsletterSubscribe";
 
 
 export async function POST(request: NextRequest) {
-   const { email } = await request.json();
+    const { email } = await request.json();
 
-   const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
-   const audience = process.env.NEXT_PUBLIC_RESEND_AUDIENCE_KEY!;
+    const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+    const audience = process.env.NEXT_PUBLIC_RESEND_AUDIENCE_KEY!;
 
-   try {
-      // add signee to the audience
-      await resend.contacts.create({
-         email,
-         unsubscribed: false,
-         audienceId: audience
-      });
+    try {
+        // add signee to the audience
+        await resend.contacts.create({
+            email,
+            unsubscribed: false,
+            audienceId: audience
+        });
 
-      // send confirmation email to signee
-      const { data: confirmData } = await resend.emails.send({
-         from: "@laplayamexicancafe.com",
-         to: email,
-         subject: "Welcome to the Social Capital Newsletter!",
-         react: NewsletterSubscribe(),
-         headers: {
-            'List-Unsubscribe': '<https://www.laplayamexicancafe.com/unsubscribe>'
-         },
-      });
+        // send confirmation email to signee
+        const { data: confirmData } = await resend.emails.send({
+            from: ""
+            to: email,
+            subject: "Welcome to the Social Capital Newsletter!",
+            react: NewsletterSubscribe(),
+            headers: {
+                'List-Unsubscribe': '<https://socapital.trade/unsubscribe>'
+            },
+        });
 
-      const data = { confirmData };
-      return NextResponse.json({ data });
-   } catch (error) {
-      console.error(error);
-      return NextResponse.json({ error: error }, { status: 500 });
-   }
+        const data = { confirmData };
+        return NextResponse.json({ data });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ error: error }, { status: 500 });
+    }
 };
