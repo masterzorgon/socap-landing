@@ -65,7 +65,7 @@ export function Toast({
   isVisible, 
   onClose, 
   type = 'success', 
-  duration = 3000,
+  duration = 2000,
   position = 'top-right'
 }: ToastProps) {
   useEffect(() => {

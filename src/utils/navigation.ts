@@ -1,7 +1,7 @@
 // Import the copyToClipboard function
 import { copyToClipboard } from './clipboard'; 
 
-export const handleHeaderClick = (
+export const handleSectionClick = (
   sectionId: string, 
   router: any, 
   showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void

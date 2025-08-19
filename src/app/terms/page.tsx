@@ -37,12 +37,12 @@ export default function Terms() {
                     }
                 />
             </Container>
-            <Header />
-            <Container>
-                <p>
-                    Welcome to Social Capital!
-                </p>
-            </Container>
+
+
+            <div className="lg:mx-72">
+                <Header />
+            </div>
+
             <Footer />
         </main>
     )
