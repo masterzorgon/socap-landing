@@ -91,6 +91,7 @@ export function ContactSection() {
 								<input
 									id="telegram-username"
 									name="telegram-username"
+									placeholder="@johndoe"
 									type="text"
 									required
 									className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 backdrop-blur-sm placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
@@ -105,6 +106,7 @@ export function ContactSection() {
 								<input
 									id="twitter-username"
 									name="twitter-username"
+									placeholder="@elonmusk"
 									type="text"
 									className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 backdrop-blur-sm placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
 								/>
@@ -123,6 +125,7 @@ export function ContactSection() {
 								<textarea
 									id="message"
 									name="message"
+									placeholder="You look pretty today <3"
 									rows={4}
 									required
 									className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 backdrop-blur-sm placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
@@ -131,7 +134,7 @@ export function ContactSection() {
 							</div>
 						</div>
 					</div>
-					<div className="mt-6">
+					<div className="mt-8">
 						<Button
 							className="w-full sm:w-auto rounded-md"
 							type="submit"

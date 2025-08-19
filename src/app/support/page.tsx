@@ -52,7 +52,7 @@ export default function Support() {
 				/>
 			</Container>
 
-			<div className="relative">
+			<div className="relative lg:mx-68">
 				<aside className="hidden lg:block fixed left-6 top-56 w-56">
 					<div className="max-h-[calc(100vh-24rem-6rem)] overflow-y-auto">
 						<NavigationSidebar
@@ -64,7 +64,7 @@ export default function Support() {
 					</div>
 				</aside>
 
-				<div className="lg:mx-68">
+				<div className="">
 					<Header 
 						heading="Everything you need to know" 
 						lead="We're here to help you get the most out of Social Capital." 
