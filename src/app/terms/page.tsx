@@ -5,24 +5,12 @@ import { Container } from "@/components/container"
 import { Heading, Lead } from "@/components/text"
 import { Navbar } from "@/components/navbar"
 import { GradientBackground } from "@/components/gradient"
-import { NavigationSidebar } from "@/components/NavigationSidebar"
+import { NavigationSidebar } from "@/components/navigation-sidebar"
 import { useToast } from "@/components/toast-provider"
 import Link from "next/link"
 import { ChevronRightIcon } from "@heroicons/react/24/outline"
 import { useRouter } from "next/navigation"
-
-function Header() {
-    return (
-        <Container className="mt-16 bg-white">
-            <Heading as="h1" className="text-gray-900">
-                Terms of Service
-            </Heading>
-            <Lead className="mt-6 max-w-3xl text-gray-600">
-                Last updated: August 19, 2025
-            </Lead>
-        </Container>
-    )
-}
+import { Header } from "@/components/header"
 
 function TermsSection({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
     const router = useRouter()
@@ -66,7 +54,63 @@ export default function Terms() {
         { id: 'user-accounts', label: 'User Accounts', icon: '👤' },
         { id: 'intellectual-property', label: 'Intellectual Property', icon: '💡' },
         { id: 'limitations', label: 'Limitations of Liability', icon: '⚠️' },
-        { id: 'termination', label: 'Termination', icon: '🚨' },
+    ]
+
+    const sections = [
+        {
+            id: 'acceptance',
+            title: 'Acceptance of Terms',
+            children: [
+                <p>
+                    By accessing and using Social Capital, you accept and agree to be bound by the terms and provision of this agreement.
+                </p>
+            ]
+        },
+        {
+            id: 'privacy',
+            title: 'Privacy Policy',
+            children: [
+                <p>
+                    Your privacy is important to us. Please review our Privacy Policy, which also governs your use of the service.
+                </p>
+            ]
+        },
+        {
+            id: 'services',
+            title: 'Services Description',
+            children: [
+                <p>
+                    Social Capital provides a decentralized exchange platform for trading digital assets.
+                </p>
+            ]
+        },
+        {
+            id: 'user-accounts',
+            title: 'User Accounts',
+            children: [
+                <p>
+                    You are responsible for maintaining the confidentiality of your account information.
+                </p>
+            ]
+        },
+        {
+            id: 'intellectual-property',
+            title: 'Intellectual Property',
+            children: [
+                <p>
+                    The service and its original content, features, and functionality are owned by Social Capital and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
+                </p>,
+            ]
+        },
+        {
+            id: 'limitations',
+            title: 'Limitations of Liability',
+            children: [
+                <p>
+                    In no event shall Social Capital, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages.
+                </p>
+            ]
+        },
     ]
 
     return (
@@ -99,64 +143,11 @@ export default function Terms() {
                 </aside>
 
                 <div className="lg:mx-68">
-                    <Header />
+                    <Header heading="Terms of Service" lead="Last updated: August 19, 2025" />
 
-                    <TermsSection id="acceptance" title="Acceptance of Terms">
-                        <p>
-                            By accessing and using Social Capital, you accept and agree to be bound by the terms and provision of this agreement.
-                        </p>
-                        <p>
-                            If you do not agree to abide by the above, please do not use this service.
-                        </p>
-                    </TermsSection>
-
-                    <TermsSection id="services" title="Services Description">
-                        <p>
-                            Social Capital provides a decentralized exchange platform for trading digital assets.
-                        </p>
-                        <p>
-                            Our services include but are not limited to: asset trading, portfolio management, and market analysis tools.
-                        </p>
-                    </TermsSection>
-
-                    <TermsSection id="user-accounts" title="User Accounts">
-                        <p>
-                            You are responsible for maintaining the confidentiality of your account information.
-                        </p>
-                        <p>
-                            You agree to accept responsibility for all activities that occur under your account.
-                        </p>
-                    </TermsSection>
-
-                    <TermsSection id="privacy" title="Privacy Policy">
-                        <p>
-                            Your privacy is important to us. Please review our Privacy Policy, which also governs your use of the service.
-                        </p>
-                    </TermsSection>
-
-                    <TermsSection id="intellectual-property" title="Intellectual Property">
-                        <p>
-                            The service and its original content, features, and functionality are owned by Social Capital and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
-                        </p>
-                    </TermsSection>
-
-                    <TermsSection id="limitations" title="Limitations of Liability">
-                        <p>
-                            In no event shall Social Capital, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages.
-                        </p>
-                    </TermsSection>
-
-                    <TermsSection id="termination" title="Termination">
-                        <p>
-                            We may terminate or suspend your account and bar access to the service immediately, without prior notice or liability, under our sole discretion.
-                        </p>
-                    </TermsSection>
-
-                    <TermsSection id="governing-law" title="Governing Law">
-                        <p>
-                            These terms shall be interpreted and governed by the laws of the jurisdiction in which Social Capital operates.
-                        </p>
-                    </TermsSection>
+                    {sections.map(section => (
+                        <TermsSection key={section.id} id={section.id} title={section.title} children={section.children} />
+                    ))}
                 </div>
             </div>
 

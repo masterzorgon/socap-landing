@@ -15,23 +15,11 @@ import { UserGuidesSection } from "@/components/support/UserGuideSection"
 import { ArchitectureSection } from "@/components/support/ArchitectureSection"
 import { BrowserSupportSection } from "@/components/support/BrowserSupportSection"
 import { ContactSection } from "@/components/support/ContactSection"
-import { NavigationSidebar } from "@/components/NavigationSidebar"
+import { NavigationSidebar } from "@/components/navigation-sidebar"
+import { Header } from "@/components/header"
 
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from "next/link"
-
-function Header() {
-	return (
-		<Container className="mt-16 bg-white">
-			<Heading as="h1" className="text-gray-900">
-				Everything you need to know
-			</Heading>
-			<Lead className="mt-6 max-w-3xl text-gray-600">
-				We're here to help you get the most out of Social Capital.
-			</Lead>
-		</Container>
-	)
-}
 
 export default function Support() {
 	const { showToast } = useToast()
@@ -77,7 +65,10 @@ export default function Support() {
 				</aside>
 
 				<div className="lg:mx-68">
-					<Header />
+					<Header 
+						heading="Everything you need to know" 
+						lead="We're here to help you get the most out of Social Capital." 
+					/>
 					<IntroSection />
 					<UserGuidesSection />
 					<ArchitectureSection />
