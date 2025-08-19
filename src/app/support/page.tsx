@@ -5,38 +5,14 @@ import { GradientBackground } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { Container } from "@/components/container"
 import { Heading, Lead } from "@/components/text"
+import { useToast } from "@/components/toast-provider"
+import { handleHeaderClick } from "@/utils/navigation"
+
 import { Disclosure } from '@headlessui/react'
 import { ChevronRightIcon, MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import { LockClosedIcon, ServerIcon, StarIcon } from '@heroicons/react/24/solid';
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useToast } from "@/components/toast-provider"
-
-// Utility function to copy URL to clipboard
-const copyToClipboard = async (url: string, showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void) => {
-  try {
-    await navigator.clipboard.writeText(url);
-    showToast("URL copied to clipboard!", "success");
-  } catch (err) {
-    console.error('Failed to copy to clipboard:', err);
-    showToast("Failed to copy URL to clipboard", "error");
-  }
-};
-
-// Utility function to handle header clicks
-const handleHeaderClick = (sectionId: string, router: any, showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning') => void) => {
-  const url = `${window.location.origin}/support#${sectionId}`;
-  copyToClipboard(url, showToast);
-
-  // Update the URL without page reload
-  router.push(`/support#${sectionId}`);
-
-  // Smooth scroll to the section
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-  }
-};
 
 function Header() {
   return (
@@ -55,7 +31,6 @@ function FAQSection({ faqs }: { faqs: Array<{ question: string; answer: string }
   const router = useRouter();
   const { showToast } = useToast();
   
-  // Split FAQs into two arrays for left and right columns
   const leftFaqs = faqs.slice(0, Math.ceil(faqs.length / 2));
   const rightFaqs = faqs.slice(Math.ceil(faqs.length / 2));
 
@@ -69,7 +44,6 @@ function FAQSection({ faqs }: { faqs: Array<{ question: string; answer: string }
         Frequently Asked Questions
       </h2>
       <section className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
-        {/* Left column */}
         <div>
           <dl className="divide-y divide-gray-200">
             {leftFaqs.map((faq) => (
@@ -105,7 +79,6 @@ function FAQSection({ faqs }: { faqs: Array<{ question: string; answer: string }
           </dl>
         </div>
 
-        {/* Right column */}
         <div>
           <dl className="divide-y divide-gray-200">
             {rightFaqs.map((faq) => (
@@ -440,7 +413,6 @@ export default function Support() {
     },
   ]
 
-  // Define the points data
   const pointsData: PointItem[] = [
     {
       id: 1,
@@ -464,7 +436,6 @@ export default function Support() {
     }
   ];
 
-  // Define the guides data
   const userGuides: UserGuideItem[] = [
     {
       title: "Creating a Market",
@@ -484,7 +455,6 @@ export default function Support() {
     },
   ];
 
-  // Define the architecture items data
   const architectureItems: ArchitectureItem[] = [
     {
       title: "Permissionless Markets",
