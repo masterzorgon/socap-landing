@@ -3,14 +3,8 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { Gradient } from '@/components/gradient'
-import { Keyboard } from '@/components/keyboard'
 import { Link } from '@/components/link'
-import { LinkedAvatars } from '@/components/linked-avatars'
-import { LogoCluster } from '@/components/logo-cluster'
-import { LogoTimeline } from '@/components/logo-timeline'
-import { Map } from '@/components/map'
 import { Navbar } from '@/components/navbar'
-import { Screenshot } from '@/components/screenshot'
 import { Heading, Subheading } from '@/components/text'
 import { Preview } from '@/components/preview'
 import Carousel from '@/components/carousel'
@@ -27,7 +21,7 @@ export const metadata: Metadata = {
 
 function Hero() {
   return (
-    <div className="relative">
+    <div id="hero" className="relative">
       <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Navbar
@@ -97,147 +91,50 @@ function Hero() {
   )
 }
 
-function FeatureSection() {
-  return (
-    <div className="overflow-hidden">
-      <Container className="pb-24">
-        <Heading as="h2" className="max-w-3xl">
-          A snapshot of your entire sales pipeline.
-        </Heading>
-        <Screenshot
-          width={1216}
-          height={768}
-          src="/screenshots/app.png"
-          className="mt-16 h-144 sm:h-auto sm:w-304"
-        />
-      </Container>
-    </div>
-  )
-}
-
 function BentoSection() {
   return (
-    <Container>
-      <Subheading>Features</Subheading>
-      <Heading as="h3" className="mt-2 max-w-3xl">
-        A Whole New Asset Class.
-      </Heading>
-
-      {/* bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat */}
-      <div className="sm:mb-[-500px] mt-10 grid grid-cols-1 gap-4 sm:mt-20 lg:grid-cols-6 lg:grid-rows-2">
-        <BentoCard
-          eyebrow="Step 1"
-          title="Token Creation"
-          description="Users vote with SOL to fund launch. LP seeded below vote price for downside protection. Anti-sniper rules enforce fair access."
-          graphic={
-            <div className="h-80 bg-[url(/screenshots/token-creation-preview.png)]" />
-          }
-          fade={['bottom']}
-          className="max-lg:rounded-t-4xl lg:col-span-2 lg:rounded-bl-4xl lg:rounded-tl-4xl"
-        />
-
-        {/* bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat */}
-        <BentoCard
-          eyebrow="Step 2"
-          title="Spot Token Launch"
-          description="SOL/token LP goes live. Presale wallets get early access. Spot traders earn 25% of perp fees. LP curve supports both stability and upside."
-          graphic={
-            <div className="absolute inset-0 bg-[url(/screenshots/spot-preview.png)]" />
-          }
-          fade={['bottom']}
-          className="lg:col-span-2"
-        />
-
-        {/* bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat */}
-        <BentoCard
-          eyebrow="Step 3"
-          title="Trade Perps with Leverage"
-          description="Perps built with D8X. Funding via internal TWAP, no oracles needed. Trade sentiment with leverage. Each token gets its own market."
-          graphic={
-            <div className="absolute inset-0 bg-[url(/screenshots/perps-preview.png)]" />
-          }
-          fade={['bottom']}
-          className="lg:col-span-2 lg:rounded-br-4xl lg:rounded-tr-4xl"
-        />
-
-        {/* <BentoCard
-          eyebrow="Leverage"
-          title="Built for power users"
-          description="It’s never been faster to cold email your entire contact list using our streamlined keyboard shortcuts."
-          graphic={
-            <div className="flex size-full pt-10 pl-10">
-              <Keyboard highlighted={['LeftCommand', 'LeftShift', 'D']} />
-            </div>
-          }
-          className="lg:col-span-2 lg:rounded-bl-4xl"
-        />
-        <BentoCard
-          eyebrow="Source"
-          title="Get the furthest reach"
-          description="Bypass those inconvenient privacy laws to source leads from the most unexpected places."
-          graphic={<LogoCluster />}
-          className="lg:col-span-2"
-        />
-        <BentoCard
-          eyebrow="Limitless"
-          title="Sell globally"
-          description="Radiant helps you sell in locations currently under international embargo."
-          graphic={<Map />}
-          className="max-lg:rounded-b-4xl lg:col-span-2 lg:rounded-br-4xl"
-        /> */}
-      </div>
-    </Container>
-  )
-}
-
-function DarkBentoSection() {
-  return (
-    <div className="mx-2 mt-2 rounded-4xl bg-gray-900 py-32">
+    <div id="features">
       <Container>
-        <Subheading dark>Outreach</Subheading>
-        <Heading as="h3" dark className="mt-2 max-w-3xl">
-          Customer outreach has never been easier.
+        <Subheading>Features</Subheading>
+        <Heading as="h3" className="mt-2 max-w-3xl">
+          A Whole New Asset Class.
         </Heading>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+        {/* bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat */}
+        <div className="sm:mb-[-500px] mt-10 grid grid-cols-1 gap-4 sm:mt-20 lg:grid-cols-6 lg:grid-rows-2">
           <BentoCard
-            dark
-            eyebrow="Networking"
-            title="Sell at the speed of light"
-            description="Our RadiantAI chat assistants analyze the sentiment of your conversations in real time, ensuring you're always one step ahead."
+            eyebrow="Step 1"
+            title="Token Creation"
+            description="Users vote with SOL to fund launch. LP seeded below vote price for downside protection. Anti-sniper rules enforce fair access."
             graphic={
-              <div className="h-80 bg-[url(/screenshots/networking.png)] bg-size-[851px_344px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/screenshots/token-creation-preview.png)]" />
             }
-            fade={['top']}
-            className="max-lg:rounded-t-4xl lg:col-span-4 lg:rounded-tl-4xl"
+            fade={['bottom']}
+            className="max-lg:rounded-t-4xl lg:col-span-2 lg:rounded-bl-4xl lg:rounded-tl-4xl"
           />
+
+          {/* bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat */}
           <BentoCard
-            dark
-            eyebrow="Integrations"
-            title="Meet leads where they are"
-            description="With thousands of integrations, no one will be able to escape your cold outreach."
-            graphic={<LogoTimeline />}
-            // `overflow-visible!` is needed to work around a Chrome bug that disables the mask on the graphic.
-            className="z-10 overflow-visible! lg:col-span-2 lg:rounded-tr-4xl"
-          />
-          <BentoCard
-            dark
-            eyebrow="Meetings"
-            title="Smart call scheduling"
-            description="Automatically insert intro calls into your leads' calendars without their consent."
-            graphic={<LinkedAvatars />}
-            className="lg:col-span-2 lg:rounded-bl-4xl"
-          />
-          <BentoCard
-            dark
-            eyebrow="Engagement"
-            title="Become a thought leader"
-            description="RadiantAI automatically writes LinkedIn posts that relate current events to B2B sales, helping you build a reputation as a thought leader."
+            eyebrow="Step 2"
+            title="Spot Token Launch"
+            description="SOL/token LP goes live. Presale wallets get early access. Spot traders earn 25% of perp fees. LP curve supports both stability and upside."
             graphic={
-              <div className="h-80 bg-[url(/screenshots/engagement.png)] bg-size-[851px_344px] bg-no-repeat" />
+              <div className="absolute inset-0 bg-[url(/screenshots/spot-preview.png)]" />
             }
-            fade={['top']}
-            className="max-lg:rounded-b-4xl lg:col-span-4 lg:rounded-br-4xl"
+            fade={['bottom']}
+            className="lg:col-span-2"
+          />
+
+          {/* bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat */}
+          <BentoCard
+            eyebrow="Step 3"
+            title="Trade Perps with Leverage"
+            description="Perps built with D8X. Funding via internal TWAP, no oracles needed. Trade sentiment with leverage. Each token gets its own market."
+            graphic={
+              <div className="absolute inset-0 bg-[url(/screenshots/perps-preview.png)]" />
+            }
+            fade={['bottom']}
+            className="lg:col-span-2 lg:rounded-br-4xl lg:rounded-tr-4xl"
           />
         </div>
       </Container>
@@ -250,12 +147,19 @@ export default function Home() {
     <div className="overflow-hidden">
       <Hero />
       <main>
-        <Container className="mt-10">
-          <Carousel />
-        </Container>
+        <div id="carousel">
+          <Container className="mt-10">
+            <Carousel />
+          </Container>
+        </div>
         <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
-          <Preview />
-          <Newsletter />
+          <div id="preview">
+            <Preview />
+          </div>
+          <div id="newsletter">
+            <Newsletter />
+          </div>
+          
           <BentoSection />
         </div>
       </main>
