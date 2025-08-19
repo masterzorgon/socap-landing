@@ -105,45 +105,49 @@ function Header() {
 
 export default function Support() {
 	const { showToast } = useToast();
-
+  
 	return (
-		<main className="overflow-hidden">
-			<GradientBackground />
-			<Container>
-				<Navbar
-					banner={
-						<Link
-							href="/blog/radiant-raises-100m-series-a-from-tailwind-ventures"
-							className="flex items-center gap-1 rounded-full bg-fuchsia-950/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-fuchsia-950/30"
-						>
-							Open Beta Is Now Live!
-							<ChevronRightIcon className="size-4" />
-						</Link>
-					}
-				/>
-			</Container>
-
-			<div className="relative">
-				<div className="lg:mr-6 lg:ml-68 border-2 border-green-500">
-					<Header />
-					<IntroSection />
-					<UserGuidesSection />
-					<ArchitectureSection />
-					<FAQSection />
-					<AuditsSection />
-					<PointsSection />
-					<BrowserSupportSection />
-					<ContactSection />
-				</div>
-
-				<div className="hidden lg:block fixed left-6 top-56 bottom-84 w-56 border-2 border-purple-500">
-					<div className="sticky h-fit ">
-						<NavigationMenu showToast={showToast} />
-					</div>
-				</div>
+	  <main className="overflow-x-hidden"> {/* avoid overflow:hidden on the scroll container */}
+		<GradientBackground />
+		<Container>
+		  <Navbar
+			banner={
+			  <Link
+				href="/blog/radiant-raises-100m-series-a-from-tailwind-ventures"
+				className="flex items-center gap-1 rounded-full bg-fuchsia-950/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-fuchsia-950/30"
+			  >
+				Open Beta Is Now Live!
+				<ChevronRightIcon className="size-4" />
+			  </Link>
+			}
+		  />
+		</Container>
+  
+		<div className="relative">
+		  {/* Sidebar: fixed on screen, with internal scrolling and bottom cap */}
+		  <aside className="hidden lg:block fixed left-6 top-56 w-56 border-2 border-purple-500">
+			{/* top-56 = 14rem; bottom buffer here is 6rem => adjust as you like */}
+			<div className="max-h-[calc(100vh-24rem-6rem)] overflow-y-auto">
+			  <NavigationMenu showToast={showToast} />
 			</div>
-
-			<Footer />
-		</main>
-	)
-}
+		  </aside>
+  
+		  {/* Main content centered */}
+		  <div className="lg:mx-68 border-2 border-green-500">
+			<Header />
+			<IntroSection />
+			<UserGuidesSection />
+			<ArchitectureSection />
+			<FAQSection />
+			<AuditsSection />
+			<PointsSection />
+			<BrowserSupportSection />
+			<ContactSection />
+		  </div>
+		</div>
+  
+		<Footer />
+	  </main>
+	);
+  }
+  
