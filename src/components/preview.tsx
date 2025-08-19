@@ -6,7 +6,6 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from './container'
-// import backgroundImage from '@/images/background-features.jpg'
 import screenshotExpenses from '../../public/screenshots/competitors.png'
 import screenshotPayroll from '../../public/screenshots/competitors.png'
 import screenshotReporting from '../../public/screenshots/competitors.png'
@@ -65,14 +64,6 @@ export function Preview() {
             aria-label="Features for running your books"
             className="relative overflow-hidden bg-white mt-20"
         >
-            {/* <Image
-                className="absolute top-1/2 left-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-                src={backgroundImage}
-                alt=""
-                width={2245}
-                height={1636}
-                unoptimized
-            /> */}
             <Container className="relative">
                 <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
                     <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl md:text-5xl">

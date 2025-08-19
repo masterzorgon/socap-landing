@@ -144,26 +144,23 @@ function BentoSection() {
 
 export default function Home() {
   return (
-    <div className="overflow-hidden">
+    <main className="overflow-hidden">
       <Hero />
-      <main>
-        <div id="carousel">
+        <section id="carousel">
           <Container className="mt-10">
             <Carousel />
           </Container>
-        </div>
-        <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+        </section>
+        <section className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
           <div id="preview">
             <Preview />
           </div>
           <div id="newsletter">
             <Newsletter />
           </div>
-          
           <BentoSection />
-        </div>
-      </main>
+        </section>
       <Footer />
-    </div>
+    </main>
   )
 }

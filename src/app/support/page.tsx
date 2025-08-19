@@ -107,7 +107,7 @@ export default function Support() {
 	const { showToast } = useToast();
   
 	return (
-	  <main className="overflow-x-hidden"> {/* avoid overflow:hidden on the scroll container */}
+	  <main className="overflow-x-hidden">
 		<GradientBackground />
 		<Container>
 		  <Navbar
@@ -124,16 +124,13 @@ export default function Support() {
 		</Container>
   
 		<div className="relative">
-		  {/* Sidebar: fixed on screen, with internal scrolling and bottom cap */}
-		  <aside className="hidden lg:block fixed left-6 top-56 w-56 border-2 border-purple-500">
-			{/* top-56 = 14rem; bottom buffer here is 6rem => adjust as you like */}
+		  <aside className="hidden lg:block fixed left-6 top-56 w-56">
 			<div className="max-h-[calc(100vh-24rem-6rem)] overflow-y-auto">
 			  <NavigationMenu showToast={showToast} />
 			</div>
 		  </aside>
   
-		  {/* Main content centered */}
-		  <div className="lg:mx-68 border-2 border-green-500">
+		  <div className="lg:mx-68">
 			<Header />
 			<IntroSection />
 			<UserGuidesSection />
