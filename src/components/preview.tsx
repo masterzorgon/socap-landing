@@ -6,28 +6,26 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from './container'
-import screenshotExpenses from '../../public/screenshots/competitors.png'
-import screenshotPayroll from '../../public/screenshots/competitors.png'
-import screenshotReporting from '../../public/screenshots/competitors.png'
+import screenshotTrade from '../../public/screenshots/trade.png'
 
 const features = [
     {
         title: 'LP into Markets',
         description:
             'Provide liquidity to new profile markets and earn a share of trading fees. Seed positions early to earn a share of trading fees for the markets you back.',
-        image: screenshotPayroll,
+        image: screenshotTrade,
     },
     {
         title: 'Trade Spot Assets',
         description:
             'Buy and sell profile tokens directly in the spot market. Get exposure to social sentiment around your favorite Twitter (X) personalities.',
-        image: screenshotExpenses,
+        image: screenshotTrade,
     },
     {
         title: 'Trading Perps',
         description:
             'Go long or short with leverage on any profile token. Speculate on sentiment swings as Twitter (X) personalities rise and fall in popularity.',
-        image: screenshotReporting,
+        image: screenshotTrade,
     },
 ]
 
@@ -82,7 +80,7 @@ export function Preview() {
                                             className={clsx(
                                                 'group relative rounded-full px-4 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
                                                 selectedIndex === featureIndex
-                                                    ? 'bg-blue-600 lg:bg-blue-600/10 lg:ring-1 lg:ring-blue-600/20 lg:ring-inset'
+                                                    ? 'bg-primary lg:bg-primary/10 lg:ring-1 lg:ring-primary/20 lg:ring-inset'
                                                     : 'hover:bg-gray-100 lg:hover:bg-gray-50',
                                             )}
                                         >
@@ -91,7 +89,7 @@ export function Preview() {
                                                     className={clsx(
                                                         'font-display text-lg data-selected:not-data-focus:outline-hidden',
                                                         selectedIndex === featureIndex
-                                                            ? 'text-white lg:text-blue-600'
+                                                            ? 'text-white lg:text-primary'
                                                             : 'text-gray-700 hover:text-gray-900 lg:text-gray-700',
                                                     )}
                                                 >
@@ -103,7 +101,7 @@ export function Preview() {
                                                 className={clsx(
                                                     'mt-2 hidden text-sm lg:block',
                                                     selectedIndex === featureIndex
-                                                        ? 'text-blue-600'
+                                                        ? 'text-gray-900'
                                                         : 'text-gray-600 group-hover:text-gray-700',
                                                 )}
                                             >
