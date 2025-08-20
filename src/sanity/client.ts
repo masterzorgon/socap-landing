@@ -1,13 +1,15 @@
 import { createClient, type QueryParams } from 'next-sanity'
-import { apiVersion, dataset, projectId } from './env'
 
+const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: isDevelopment ? false : true,
+  useCdn: isDevelopment ? true : true,
 })
 
 export async function sanityFetch<const QueryString extends string>({
@@ -23,7 +25,7 @@ export async function sanityFetch<const QueryString extends string>({
 }) {
   return client.fetch(query, params, {
     next: {
-      revalidate: isDevelopment || tags.length ? false : revalidate,
+      revalidate: !isDevelopment || tags.length ? false : revalidate,
       tags,
     },
   })

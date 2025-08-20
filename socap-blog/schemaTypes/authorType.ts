@@ -26,6 +26,19 @@ export const authorType = defineType({
         source: 'name',
         maxLength: 96,
       },
+      validation: (Rule) => Rule.custom((value, context) => {
+        if (!value) return true;
+        
+        const name = context.document?.name;
+        if (!name || typeof name !== 'string') return true;
+        
+        const expectedSlug = name.replace('@', '');
+        if (value.current !== expectedSlug) {
+          return `Slug must match the name without @ symbol. Expected: "${expectedSlug}"`;
+        }
+        
+        return true;
+      }),
     }),
     defineField({
       name: 'image',
