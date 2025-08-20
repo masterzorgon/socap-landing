@@ -10,6 +10,14 @@ export const authorType = defineType({
     defineField({
       name: 'name',
       type: 'string',
+      validation: (Rule) => Rule.custom((value) => {
+        if (!value) return true;
+        if (typeof value !== 'string') return 'Name must be a string';
+        if (!value.startsWith('@')) {
+          return 'Name must start with @ symbol — your twitter handle (e.g. @elonmusk)';
+        }
+        return true;
+      }),
     }),
     defineField({
       name: 'slug',

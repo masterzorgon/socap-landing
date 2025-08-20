@@ -44,18 +44,20 @@ export default async function BlogPost({
         <div className="mt-16 grid grid-cols-1 gap-8 pb-24 lg:grid-cols-[15rem_1fr] xl:grid-cols-[15rem_1fr_15rem]">
           <div className="flex flex-wrap items-center gap-8 max-lg:justify-between lg:flex-col lg:items-start">
             {post.author && (
-              <div className="flex items-center gap-3">
-                {post.author.image && (
-                  <img
-                    alt=""
-                    src={image(post.author.image).size(64, 64).url()}
-                    className="aspect-square size-6 rounded-full object-cover"
-                  />
-                )}
-                <div className="text-sm/5 text-gray-700">
-                  {post.author.name}
+              <Link href={`https://x.com/${post.author.name?.slice(1)}`} target="_blank">
+                <div className="flex items-center gap-3 cursor-pointer">
+                  {post.author.image && (
+                    <img
+                      alt=""
+                      src={image(post.author.image).size(64, 64).url()}
+                      className="aspect-square size-6 rounded-full object-cover"
+                    />
+                  )}
+                  <div className="text-sm/5 text-gray-700">
+                    {post.author.name}
+                  </div>
                 </div>
-              </div>
+              </Link>
             )}
             {Array.isArray(post.categories) && (
               <div className="flex flex-wrap gap-2">

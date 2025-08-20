@@ -419,6 +419,7 @@ export type POST_QUERYResult = {
       }
   > | null
   author: {
+    twitter: string | (UrlObject & string)
     name: string | null
     image: {
       asset?: {
