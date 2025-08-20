@@ -1,6 +1,7 @@
 import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
 import { ToastProvider } from '@/components/toast-provider'
+import { CookieConsent } from '@/components/cookie-consent'
 
 export const metadata: Metadata = {
   title: {
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body className="text-gray-950 antialiased">
         <ToastProvider>
           {children}
+          <CookieConsent />
         </ToastProvider>
       </body>
     </html>
