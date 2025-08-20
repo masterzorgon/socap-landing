@@ -75,7 +75,7 @@ function Hero() {
           </div>
 
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4">
-            <Button variant="secondary" href="/pricing">
+            <Button variant="secondary" href="#">
               <img src="/chrome-icon.png" alt="Chrome Icon" width={20} height={20} className="inline-block align-middle mr-2" />
               Download Chrome Extension
             </Button>

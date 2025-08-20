@@ -176,3 +176,26 @@ export function clearNonNecessaryCookies(): void {
     // Add any functional cookies to clear
   }
 } 
+
+// Add this new function to handle cookie rejection
+export function rejectCookies(): void {
+  // Set a rejection flag
+  setCookie('cookie-rejected', 'true', { days: 1 });
+  
+  // Clear any existing consent
+  deleteCookie(COOKIE_CONSENT_KEY);
+  deleteCookie(COOKIE_PREFERENCES_KEY);
+  
+  // Clear all non-necessary cookies
+  clearNonNecessaryCookies();
+}
+
+// Check if cookies were rejected
+export function wereCookiesRejected(): boolean {
+  return getCookie('cookie-rejected') === 'true';
+}
+
+// Clear rejection flag
+export function clearRejectionFlag(): void {
+  deleteCookie('cookie-rejected');
+} 

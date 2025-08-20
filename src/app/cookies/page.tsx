@@ -3,7 +3,7 @@ import { Footer } from '@/components/footer';
 import { GradientBackground } from '@/components/gradient';
 import { Navbar } from '@/components/navbar';
 import { Heading } from '@/components/text';
-import { CookiePreferences } from '@/components/cookie-preferences';
+import { CookiePreferences } from '@/components/cookies/cookie-preferences';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
