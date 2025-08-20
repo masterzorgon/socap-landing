@@ -45,15 +45,15 @@ export default async function BlogPost({
           <div className="flex flex-wrap items-center gap-8 max-lg:justify-between lg:flex-col lg:items-start">
             {post.author && (
               <Link href={`https://x.com/${post.author.name?.slice(1)}`} target="_blank">
-                <div className="flex items-center gap-3 cursor-pointer">
+                <div className="flex items-center gap-3 cursor-pointer group">
                   {post.author.image && (
                     <img
                       alt=""
                       src={image(post.author.image).size(64, 64).url()}
-                      className="aspect-square size-6 rounded-full object-cover"
+                      className="aspect-square size-6 rounded-full object-cover group-hover:drop-shadow-lg transition-all duration-200"
                     />
                   )}
-                  <div className="text-sm/5 text-gray-700">
+                  <div className="text-sm/5 text-gray-700 group-hover:text-gray-950 transition-all duration-200">
                     {post.author.name}
                   </div>
                 </div>
