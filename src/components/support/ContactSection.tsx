@@ -145,7 +145,7 @@ export function ContactSection() {
 					</div>
 					<p className="mt-4 text-sm/6 text-gray-500">
 						By submitting this form, you agree to the{' '}
-						<a href="/terms" className="whitespace-nowrap text-primary hover:underline">
+						<a href="/terms#privacy" className="whitespace-nowrap text-primary hover:underline">
 							privacy policy
 						</a>
 						.

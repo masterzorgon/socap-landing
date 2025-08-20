@@ -18,3 +18,7 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
 
   return v
 }
+
+console.log('Dataset:', process.env.NEXT_PUBLIC_SANITY_DATASET);
+console.log('Project ID:', process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);
+console.log('API Version:', process.env.NEXT_PUBLIC_SANITY_API_VERSION);
