@@ -62,6 +62,8 @@ export function Newsletter({
 		const emailInput = form.email as HTMLInputElement;
 		const email = emailInput.value;
 
+		console.log("EMAIL", email);
+
 		if (!validateEmail(email)) {
 			showToast("Invalid email format", "error");
 			setIsSending(false);
@@ -80,16 +82,18 @@ export function Newsletter({
 			});
 
 			const result = await response.json();
-			console.log("RESULT", result);
 
 			if (response.ok) {
 				showToast("Successfully signed up!", "success");
 			} else {
-				showToast("An error occurred. Try again later.", "error");
+				console.error("Request failed:", response);
+				const errorMessage = result.error.message || "An error occurred. Try again later.";
+				showToast(errorMessage, "error");
 			}
-		} catch (error) {
+		} catch (error: unknown) {
 			console.error("Request failed:", error);
-			showToast("An error occurred. Try again later.", "error");
+			const errorMessage = error instanceof Error ? error.message : "An error occurred. Try again later.";
+			showToast(errorMessage, "error");
 		} finally {
 			setIsSending(false);
 			emailInput.value = '';
