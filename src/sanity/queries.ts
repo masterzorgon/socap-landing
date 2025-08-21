@@ -9,10 +9,10 @@ const TOTAL_POSTS_QUERY = defineQuery(/* groq */ `count(*[
 ])`)
 
 export async function getPostsCount(category?: string) {
-  return await sanityFetch({
-    query: TOTAL_POSTS_QUERY,
-    params: { category: category ?? null },
-  })
+	return await sanityFetch({
+		query: TOTAL_POSTS_QUERY,
+		params: { category: category ?? null },
+	})
 }
 
 const POSTS_QUERY = defineQuery(/* groq */ `*[
@@ -32,18 +32,18 @@ const POSTS_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getPosts(
-  startIndex: number,
-  endIndex: number,
-  category?: string,
+	startIndex: number,
+	endIndex: number,
+	category?: string,
 ) {
-  return await sanityFetch({
-    query: POSTS_QUERY,
-    params: {
-      startIndex,
-      endIndex,
-      category: category ?? null,
-    },
-  })
+	return await sanityFetch({
+		query: POSTS_QUERY,
+		params: {
+			startIndex,
+			endIndex,
+			category: category ?? null,
+		},
+	})
 }
 
 const FEATURED_POSTS_QUERY = defineQuery(/* groq */ `*[
@@ -63,10 +63,10 @@ const FEATURED_POSTS_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getFeaturedPosts(quantity: number) {
-  return await sanityFetch({
-    query: FEATURED_POSTS_QUERY,
-    params: { quantity },
-  })
+	return await sanityFetch({
+		query: FEATURED_POSTS_QUERY,
+		params: { quantity },
+	})
 }
 
 const FEED_POSTS_QUERY = defineQuery(/* groq */ `*[
@@ -84,9 +84,9 @@ const FEED_POSTS_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getPostsForFeed() {
-  return await sanityFetch({
-    query: FEED_POSTS_QUERY,
-  })
+	return await sanityFetch({
+		query: FEED_POSTS_QUERY,
+	})
 }
 
 const POST_QUERY = defineQuery(/* groq */ `*[
@@ -110,10 +110,10 @@ const POST_QUERY = defineQuery(/* groq */ `*[
 `)
 
 export async function getPost(slug: string) {
-  return await sanityFetch({
-    query: POST_QUERY,
-    params: { slug },
-  })
+	return await sanityFetch({
+		query: POST_QUERY,
+		params: { slug },
+	})
 }
 
 const CATEGORIES_QUERY = defineQuery(/* groq */ `*[
@@ -125,9 +125,9 @@ const CATEGORIES_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getCategories() {
-  return await sanityFetch({
-    query: CATEGORIES_QUERY,
-  })
+	return await sanityFetch({
+		query: CATEGORIES_QUERY,
+	})
 }
 
 // ... existing code ...
@@ -136,7 +136,7 @@ const RELATED_POSTS_QUERY = defineQuery(/* groq */ `*[
   _type == "post"
   && defined(slug.current)
   && slug.current != $currentSlug
-  && select(defined($category) => $category in categories[]->slug.current, true)
+  && (defined($category) == false || $category in categories[]->slug.current)
 ]|order(publishedAt desc)[0...$limit]{
   title,
   "slug": slug.current,
@@ -154,16 +154,16 @@ const RELATED_POSTS_QUERY = defineQuery(/* groq */ `*[
 }`)
 
 export async function getRelatedPosts(
-  currentSlug: string,
-  category: string,
-  limit: number = 3
+	currentSlug: string,
+	category: string,
+	limit: number = 3
 ) {
-  return await sanityFetch({
-    query: RELATED_POSTS_QUERY,
-    params: { 
-      currentSlug,
-      category: category ?? null,
-      limit
-    },
-  })
+	return await sanityFetch({
+		query: RELATED_POSTS_QUERY,
+		params: {
+			currentSlug,
+			category: category ?? null,
+			limit
+		},
+	})
 }

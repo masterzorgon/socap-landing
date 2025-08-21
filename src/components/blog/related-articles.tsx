@@ -1,5 +1,3 @@
-'use client'
-
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Link } from '@/components/link'
@@ -8,7 +6,6 @@ import { image } from '@/sanity/image'
 import { getRelatedPosts } from '@/sanity/queries'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import dayjs from 'dayjs'
-import { useEffect, useState } from 'react'
 
 interface RelatedPost {
     title: string | null
@@ -51,62 +48,19 @@ interface RelatedArticlesProps {
     limit?: number
 }
 
-export function RelatedArticles({
+export async function RelatedArticles({
     currentSlug,
     category,
     limit = 3
 }: RelatedArticlesProps) {
-    const [relatedPosts, setRelatedPosts] = useState<RelatedPost[]>([])
-    const [isLoading, setIsLoading] = useState(true)
+    const relatedPosts = await getRelatedPosts(currentSlug, category, limit)
 
-    useEffect(() => {
-        async function fetchRelatedPosts() {
-            try {
-                {/* BUG HERE */}
-                const posts = await getRelatedPosts(currentSlug, category, limit)
-                setRelatedPosts(posts || [])
-            } catch (error) {
-                console.error('Error fetching related posts:', error)
-            } finally {
-                setIsLoading(false)
-            }
-        }
-
-        if (category) {
-            fetchRelatedPosts()
-        } else {
-            setIsLoading(false)
-        }
-    }, [currentSlug, category, limit])
-
-    if (isLoading) {
-        return (
-            <Container className="mt-24 mb-16">
-                <div className="text-center">
-                    <div className="animate-pulse">
-                        <div className="h-4 bg-gray-200 rounded w-48 mx-auto mb-4"></div>
-                        <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-8"></div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {[...Array(3)].map((_, i) => (
-                                <div key={i} className="animate-pulse">
-                                    <div className="h-48 bg-gray-200 rounded-lg mb-4"></div>
-                                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </Container>
-        )
-    }
-
-    if (relatedPosts.length === 0) {
+    if (!relatedPosts || relatedPosts.length === 0) {
         return null
     }
 
     return (
-        <Container className="mt-24 mb-16">
+        <Container className="my-16">
             <div className="text-center">
                 <Subheading>Related Articles</Subheading>
                 <Heading as="h2" className="mt-2">
@@ -115,7 +69,7 @@ export function RelatedArticles({
             </div>
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {relatedPosts.map((post) => (
+                {relatedPosts.map((post: RelatedPost) => (
                     <article key={post.slug} className="group">
                         <Link href={`/blog/${post.slug}`} className="block">
                             <div className="relative overflow-hidden rounded-2xl bg-gray-100">
@@ -182,12 +136,6 @@ export function RelatedArticles({
                         </Link>
                     </article>
                 ))}
-            </div>
-
-            <div className="mt-12 text-center">
-                <Button variant="outline" href={`/blog?category=${currentSlug}`}>
-                    View all {category} articles
-                </Button>
             </div>
         </Container>
     )

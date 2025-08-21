@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation'
 import { ShareButton } from '@/components/blog/share-button'
 import { TableOfContentsDropdown } from '@/components/blog/table-of-contents-dropdown'
 import { RelatedArticles } from '@/components/blog/related-articles'
+import { Newsletter } from '@/components/newsletter'
 
 export async function generateMetadata({
 	params,
@@ -249,25 +250,40 @@ export default async function BlogPost({
 									}}
 								/>
 							)}
-							<div className="mt-10">
-								<Button variant="outline" href="/blog">
-									<ChevronLeftIcon className="size-4" />
-									Back to blog
-								</Button>
-							</div>
+						<hr className="my-10 border-t border-gray-200" />
 						</div>
 					</div>
 				</div>
 			</Container>
-			
+
+
+			<Newsletter
+				variant="embedded"
+				title="Join the Social Capital Newsletter"
+				description="Stay up to date with the latest features and developments."
+				backgroundClassName="bg-gradient-to-br from-primary/10 to-slate-100"
+				containerClassName="w-full m-0 p-0 mt-[-100px]"
+				gradientClassName="opacity-50"
+				margin="my-0"
+			/>
+
 			{/* Add Related Articles component - use the first category */}
 			{post.categories && post.categories.length > 0 && (
-				<RelatedArticles 
+				<RelatedArticles
 					currentSlug={params.slug}
 					category={post.categories[0].slug as string}
 					limit={3}
 				/>
 			)}
+
+			<div className='flex justify-center mb-16'>
+				<Button variant="outline" href="/blog">
+					<ChevronLeftIcon className="size-4" />
+					Back to blog
+				</Button>
+
+			</div>
+
 			<Footer />
 		</main>
 	)

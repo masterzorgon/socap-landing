@@ -105,8 +105,8 @@ export function Newsletter({
 					container: "w-full",
 					title: "text-4xl sm:text-5xl",
 					description: "text-lg",
-					padding: "py-0 sm:py-0",
-					margin: "my-0 sm:my-0"
+					padding: "py-0",
+					margin: "my-0"
 				};
 			case 'hero':
 				return {
