@@ -20,14 +20,12 @@ export function ContactSection() {
 		const twitterUsername = formData.get('twitter-username') as string;
 		const message = formData.get('message') as string;
 
-		// Validate required fields
 		if (!telegramUsername || !message) {
 			showToast("Telegram username and message are required", "error");
 			setIsSubmitting(false);
 			return;
 		}
 
-		// Validate message length
 		if (message.length < 10) {
 			showToast("Message must be at least 10 characters long", "error");
 			setIsSubmitting(false);
@@ -52,7 +50,7 @@ export function ContactSection() {
 			if (response.ok) {
 				showToast("Message sent successfully!", "success");
 			} else {
-				console.error("Error sending message:", response);
+				console.error("Error sending message:", result);
 				showToast("Failed to send message. Please try again.", "error");
 			}
 		} catch (error) {
