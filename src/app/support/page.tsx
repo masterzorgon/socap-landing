@@ -36,7 +36,7 @@ export default function Support() {
 	]
 
 	return (
-		<main className="overflow-x-hidden">
+		<main className="overflow-hidden">
 			<GradientBackground />
 			<Container>
 				<Navbar
@@ -66,8 +66,8 @@ export default function Support() {
 
 				<div className="">
 					<Header 
-						heading="Everything you need to know" 
-						lead="We're here to help you get the most out of Social Capital." 
+						heading="Support Page" 
+						lead="Everything you need to know about Social Capital." 
 					/>
 					<IntroSection />
 					<UserGuidesSection />

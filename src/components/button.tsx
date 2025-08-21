@@ -7,7 +7,8 @@ const variants = {
 		'inline-flex items-center justify-center px-4 py-[calc(--spacing(2)-1px)]',
 		'rounded-full border border-transparent bg-gray-950 shadow-md',
 		'text-base font-medium whitespace-nowrap text-white',
-		'data-disabled:bg-gray-950 data-disabled:opacity-40 data-hover:bg-gray-800 cursor-pointer',
+		'data-disabled:bg-gray-950 data-disabled:opacity-40 data-hover:bg-gray-800',
+		'data-disabled:cursor-not-allowed cursor-pointer',
 		'min-w-[120px]',
 	),
 	secondary: clsx(
@@ -16,6 +17,7 @@ const variants = {
 		'after:absolute after:inset-0 after:rounded-full after:shadow-[inset_0_0_2px_1px_#ffffff4d]',
 		'text-base font-medium whitespace-nowrap text-gray-950',
 		'data-disabled:bg-white/15 data-disabled:opacity-40 data-hover:bg-white/20',
+		'data-disabled:cursor-not-allowed cursor-pointer',
 		'min-w-[120px]',
 	),
 	outline: clsx(
@@ -23,6 +25,7 @@ const variants = {
 		'rounded-lg border border-transparent shadow-sm ring-1 ring-black/10',
 		'text-sm font-medium whitespace-nowrap text-gray-950',
 		'data-disabled:bg-transparent data-disabled:opacity-40 data-hover:bg-gray-50',
+		'data-disabled:cursor-not-allowed cursor-pointer',
 		'min-w-[100px]',
 	),
 }
