@@ -25,6 +25,7 @@ import { clsx } from 'clsx'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import type { POSTS_QUERYResult } from '@/sanity/types'
 
 export const metadata: Metadata = {
 	title: 'Blog',
@@ -146,7 +147,7 @@ async function Categories({ selected }: { selected?: string }) {
 }
 
 async function Posts({ page, category }: { page: number; category?: string }) {
-	let posts = await getPosts(
+	let posts: POSTS_QUERYResult = await getPosts(
 		(page - 1) * postsPerPage,
 		page * postsPerPage,
 		category,
@@ -186,18 +187,27 @@ async function Posts({ page, category }: { page: number; category?: string }) {
 							</div>
 						)}
 					</div>
-					<div className="sm:col-span-2 sm:max-w-2xl">
-						<h2 className="text-sm/5 font-medium">{post.title}</h2>
-						<p className="mt-3 text-sm/6 text-gray-500">{post.excerpt}</p>
-						<div className="mt-4">
-							<Link
-								href={`/blog/${post.slug}`}
-								className="flex items-center gap-1 text-sm/5 font-medium"
-							>
-								<span className="absolute inset-0" />
-								Read more
-								<ChevronRightIcon className="size-4 fill-gray-400" />
-							</Link>
+					<div className='flex gap-4'>
+						{post.mainImage && (
+							<img
+								alt={post.mainImage.alt || ''}
+								src={image(post.mainImage).size(2016, 1344).url()}
+								className="hidden lg:block mb-10 aspect-3/2 w-32 h-32 rounded-2xl object-cover shadow-xl"
+							/>
+						)}
+						<div className="sm:col-span-2 sm:max-w-2xl">
+							<h2 className="text-sm/5 font-medium">{post.title}</h2>
+							<p className="mt-3 text-sm/6 text-gray-500">{post.excerpt}</p>
+							<div className="mt-4">
+								<Link
+									href={`/blog/${post.slug}`}
+									className="flex items-center gap-1 text-sm/5 font-medium"
+								>
+									<span className="absolute inset-0" />
+									Read more
+									<ChevronRightIcon className="size-4 fill-gray-400" />
+								</Link>
+							</div>
 						</div>
 					</div>
 				</div>

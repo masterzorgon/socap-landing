@@ -1,5 +1,6 @@
 import { defineQuery } from 'next-sanity'
 import { sanityFetch } from './client'
+import type { POSTS_QUERYResult } from './types'
 
 const TOTAL_POSTS_QUERY = defineQuery(/* groq */ `count(*[
   _type == "post"
@@ -24,6 +25,7 @@ const POSTS_QUERY = defineQuery(/* groq */ `*[
   title,
   "slug": slug.current,
   publishedAt,
+  mainImage,
   excerpt,
   author->{
     name,
@@ -35,7 +37,7 @@ export async function getPosts(
 	startIndex: number,
 	endIndex: number,
 	category?: string,
-) {
+): Promise<POSTS_QUERYResult> {
 	return await sanityFetch({
 		query: POSTS_QUERY,
 		params: {

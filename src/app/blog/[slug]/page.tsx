@@ -133,6 +133,14 @@ export default async function BlogPost({
 									className="mb-10 aspect-3/2 w-full rounded-2xl object-cover shadow-xl"
 								/>
 							)}
+							{post.excerpt && (
+								<>
+									<p className="my-10 text-base/8 first:mt-0 last:mb-0">
+										{post.excerpt}
+									</p>
+									<hr className="my-10 border-t border-gray-200" />
+								</>
+							)}
 							{post.body && (
 								<PortableText
 									value={post.body}

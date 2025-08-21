@@ -291,6 +291,7 @@ export type TOTAL_POSTS_QUERYResult = number
 // Variable: POSTS_QUERY
 // Query: *[  _type == "post"  && defined(slug.current)  && (isFeatured != true || defined($category))  && select(defined($category) => $category in categories[]->slug.current, true)]|order(publishedAt desc)[$startIndex...$endIndex]{  title,  "slug": slug.current,  publishedAt,  excerpt,  author->{    name,    image,  },}
 export type POSTS_QUERYResult = Array<{
+  mainImage: any
   title: string | null
   slug: string | null
   publishedAt: string | null
@@ -419,7 +420,7 @@ export type POST_QUERYResult = {
       }
   > | null
   author: {
-    twitter: string | (UrlObject & string)
+    twitter: string
     name: string | null
     image: {
       asset?: {
