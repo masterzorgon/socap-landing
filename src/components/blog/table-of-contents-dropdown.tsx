@@ -1,7 +1,6 @@
 'use client'
 
 import { Button } from '@/components/button'
-import { Link } from '@/components/link'
 import { ChevronDownIcon, ListBulletIcon } from '@heroicons/react/16/solid'
 import { useState } from 'react'
 
@@ -12,6 +11,20 @@ interface Section {
 
 export function TableOfContentsDropdown({ sections }: { sections: Section[] }) {
 	const [isOpen, setIsOpen] = useState(false)
+
+	const handleSectionClick = (sectionId: string) => {
+		setIsOpen(false)
+		
+		const targetElement = document.getElementById(sectionId)
+		
+		if (targetElement) {
+			targetElement.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+				inline: 'nearest'
+			})
+		}
+	}
 
 	return (
 		<>
@@ -34,13 +47,12 @@ export function TableOfContentsDropdown({ sections }: { sections: Section[] }) {
 							<ul className="space-y-2">
 								{sections.map((section) => (
 									<li key={section.id}>
-										<Link 
-											href={`#${section.id}`}
-											className="block text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 px-2 py-1 rounded transition-colors duration-150"
-											onClick={() => setIsOpen(false)}
+										<button
+											onClick={() => handleSectionClick(section.id)}
+											className="cursor-pointer block w-full text-left text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 px-2 py-1 rounded transition-colors duration-150"
 										>
 											{section.title}
-										</Link>
+										</button>
 									</li>
 								))}
 							</ul>
