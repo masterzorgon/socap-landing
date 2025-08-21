@@ -5,6 +5,7 @@ import { Container } from "./container";
 import { useToast } from "./toast-provider";
 import { validateEmail } from "@/utils/validate-email";
 import { clsx } from "clsx";
+import { Button } from "./button";
 
 interface NewsletterProps {
 	// Container and layout props
@@ -42,7 +43,6 @@ export function Newsletter({
 	title = "Join the Social Capital Newsletter",
 	description = "Stay up to date with the latest features and developments.",
 	buttonText = "Sign up",
-	loadingText = "Signing up...",
 	formClassName,
 	inputClassName,
 	buttonClassName,
@@ -165,35 +165,35 @@ return (
 						{description}
 					</p>
 					<form className={clsx(
-						"mx-auto mt-10 flex max-w-md gap-x-4",
+						"mx-auto mt-10 flex max-w-md gap-x-4 flex flex-col justify-center items-center",
 						formClassName
 					)} onSubmit={handleNewsletterSignup}>
 						<label htmlFor="email-address" className="sr-only">
 							Email address
 						</label>
-						<input
-							id="email-address"
-							name="email"
-							type="email"
-							required
-							placeholder="Enter your email"
-							autoComplete="email"
-							disabled={isSending}
-							className={clsx(
-								"min-w-0 flex-auto rounded-md bg-white px-3.5 py-2 text-base text-slate-900 outline-1 -outline-offset-1 outline-primary/20 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary/50 sm:text-sm/6 border border-slate-200 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed",
-								inputClassName
-							)}
-						/>
-						<button
-							type="submit"
-							disabled={isSending}
-							className={clsx(
-								"cursor-pointer flex-none rounded-md bg-gray-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
-								buttonClassName
-							)}
-						>
-							{isSending ? loadingText : buttonText}
-						</button>
+						<div className="rounded-full p-1.5 bg-white outline outline-1 outline-slate-200/20 shadow-sm w-96 flex justify-between items-center">
+							<input
+								id="email-address"
+								name="email"
+								type="email"
+								required
+								placeholder="Enter your email"
+								autoComplete="email"
+								disabled={isSending}
+								className={clsx(
+									"min-w-0 flex-auto px-3.5 py-2 text-base text-slate-900 placeholder:text-slate-400 sm:text-sm/6 disabled:opacity-50 disabled:cursor-not-allowed outline-none",
+									inputClassName
+								)}
+							/>
+							<Button
+								type="submit"
+								variant="primary"
+								loading={isSending}
+								className={buttonClassName}
+							>
+								{!isSending && buttonText}
+							</Button>
+						</div>
 					</form>
 					{gradientClassName && (
 						<svg

@@ -131,7 +131,7 @@ export default function Terms() {
             </Container>
 
             <div className="relative lg:mx-68">
-                <aside className="hidden lg:block fixed left-6 top-56 w-56">
+                <aside className="hidden lg:block fixed left-6 top-54 w-56">
                     <div className="max-h-[calc(100vh-24rem-6rem)] overflow-y-auto">
                         <NavigationSidebar
                             showToast={showToast}
