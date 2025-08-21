@@ -16,26 +16,23 @@ export async function POST(request: NextRequest) {
             audienceId: audience,
         });
         
-        const emailExists = contactList?.data.some(contact => contact.email === email);
+        const contactExists = contactList?.data.some(contact => contact.email === email);
         
-        if (emailExists) {
+        if (contactExists) {
             return NextResponse.json({ 
                 error: "Email is already subscribed." 
             }, { status: 409 });
         }
 
-        console.log("CREATING CONTACT");
-        const contact = await resend.contacts.create({
+        await resend.contacts.create({
             email,
             unsubscribed: false,
             audienceId: audience
         });
-        console.log("CONTACT", contact);
 
         // Add a small delay to ensure contact is fully created
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        console.log("CREATING EMAIL");
         const emailHtml = await render(NewsletterSubscribe());
         const { data: confirmData, error } = await resend.emails.send({
             from: "hello@socapital.trade",
@@ -46,16 +43,6 @@ export async function POST(request: NextRequest) {
                 'List-Unsubscribe': '<https://socapital.trade/unsubscribe>'
             },
         });
-        
-        if (error) {
-            console.error("Email sending error:", error);
-            return NextResponse.json({ 
-                error: "Failed to send confirmation email",
-                details: error 
-            }, { status: 500 });
-        }
-        
-        console.log("CONFIRM DATA", confirmData);
 
         const data = { confirmData };
         return NextResponse.json({ data });
