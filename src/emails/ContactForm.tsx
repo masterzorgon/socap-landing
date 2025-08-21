@@ -29,14 +29,20 @@ const ContactForm = ({ telegramUsername, twitterUsername, message }: ContactForm
             <Tailwind>
                 <Body className="bg-white my-auto mx-auto font-sans px-2">
                     <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-[465px]">
-                        <Section className="mt-[32px] w-full flex justify-center items-center mx-auto">
+                        <Section className="mt-[32px] w-full text-center">
                             <Link href="https://socapital.trade" title="Home">
                                 <img
                                     src="https://drive.google.com/thumbnail?id=1c6byqYzhsV-xq781DE7SErlBz4vxhTUC"
                                     alt="Social Capital Icon"
                                     width={30}
                                     height={30}
-                                    className="inline-block align-middle mx-2"
+                                    style={{
+                                        display: 'block',
+                                        margin: '0 auto',
+                                        border: '0',
+                                        outline: 'none',
+                                        textDecoration: 'none'
+                                    }}
                                 />
                             </Link>
                         </Section>
