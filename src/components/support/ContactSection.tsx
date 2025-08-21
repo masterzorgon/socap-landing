@@ -14,7 +14,8 @@ export function ContactSection() {
 		event.preventDefault();
 		setIsSubmitting(true);
 
-		const formData = new FormData(event.currentTarget);
+		const form = event.currentTarget;
+		const formData = new FormData(form);
 		const telegramUsername = formData.get('telegram-username') as string;
 		const twitterUsername = formData.get('twitter-username') as string;
 		const message = formData.get('message') as string;
@@ -59,6 +60,7 @@ export function ContactSection() {
 			showToast("An error occurred. Please try again later.", "error");
 		} finally {
 			setIsSubmitting(false);
+			form.reset();
 		}
 	};
 
