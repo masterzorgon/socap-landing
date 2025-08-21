@@ -34,7 +34,7 @@ export default function CookiesPage() {
 
       <div className="relative lg:mx-68">
       <Header 
-						heading="Cookie Policy" 
+						heading="Cookie Preferences" 
 						lead="Manage your cookie preferences to control how we use cookies on our website." 
 					/>
         <CookiePreferences />

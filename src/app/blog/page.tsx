@@ -300,49 +300,15 @@ export default async function Blog({
 			</Container>
 			{page === 1 && !category && <FeaturedPosts />}
 			{page === 1 && !category && (
-				<div className='w-full h-full flex flex-col items-center justify-center py-10 border-b border-gray-200 bg-gradient-to-br from-primary/10 to-slate-100'>
-					<h2 className='text-3xl font-medium tracking-tight'>Join the Social Capital Newsletter</h2>
-					<p className='text-lg/12 text-gray-500'>Stay up to date with the latest features and developments.</p>
-					<form className="mx-auto mt-10 flex max-w-md gap-x-4">
-						<input id="email-address"
-							name="email"
-							type="email"
-							required
-							placeholder="Enter your email"
-							autoComplete="email"
-							className="min-w-0 flex-auto rounded-md bg-white px-3.5 py-2 text-base text-slate-900 outline-1 -outline-offset-1 outline-primary/20 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary/50 sm:text-sm/6 border border-slate-200 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
-						/>
-						<button
-							type="submit"
-							// disabled={isSending}
-							className="cursor-pointer flex-none rounded-md bg-gray-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-
-						>
-							Subscribe
-						</button>
-					</form>
-
-					<svg
-						viewBox="0 0 1024 1024"
-						aria-hidden="true"
-						className="absolute top-1/2 left-1/2 -z-10 size-256 -translate-x-1/2 opacity-50"
-					>
-						<circle r={512} cx={512} cy={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.3" />
-						<defs>
-							<radialGradient
-								r={1}
-								cx={0}
-								cy={0}
-								id="759c1415-0410-454c-8f7c-9a820de03641"
-								gradientUnits="userSpaceOnUse"
-								gradientTransform="translate(512 512) rotate(90) scale(512)"
-							>
-								<stop stopColor="#EC4899" />
-								<stop offset={1} stopColor="#F472B6" stopOpacity={0} />
-							</radialGradient>
-						</defs>
-					</svg>
-				</div>
+				<Newsletter 
+					variant="embedded"
+					title="Join the Social Capital Newsletter"
+					description="Stay up to date with the latest features and developments."
+					backgroundClassName="bg-gradient-to-br from-primary/10 to-slate-100"
+					containerClassName="w-full"
+					gradientClassName="opacity-50"
+					margin="my-0"
+				/>
 			)}
 			<Container className="mt-6 pb-24">
 				<Categories selected={category} />

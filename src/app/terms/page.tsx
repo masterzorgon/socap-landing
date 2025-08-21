@@ -48,8 +48,8 @@ export default function Terms() {
     const { showToast } = useToast()
 
     const navigationItems = [
-        { id: 'acceptance', label: 'Acceptance of Terms', icon: '✅' },
         { id: 'privacy', label: 'Privacy Policy', icon: '🔒' },
+        { id: 'cookie-policy', label: 'Cookie Policy', icon: '🍪' },
         { id: 'services', label: 'Services Description', icon: '✍️' },
         { id: 'user-accounts', label: 'User Accounts', icon: '👤' },
         { id: 'intellectual-property', label: 'Intellectual Property', icon: '💡' },
@@ -58,11 +58,12 @@ export default function Terms() {
 
     const sections = [
         {
-            id: 'acceptance',
-            title: 'Acceptance of Terms',
+            id: 'cookie-policy',
+            title: 'Cookie Policy',
             children: [
                 <p>
-                    By accessing and using Social Capital, you accept and agree to be bound by the terms and provision of this agreement.
+                    We use cookies to improve your experience on our website. By using our website, you consent to our use of cookies.
+                    Adjust your cookie preferences <Link href="/cookies" className="text-primary hover:underline">here</Link>.
                 </p>
             ]
         },
