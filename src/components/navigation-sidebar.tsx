@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
-import { handleSectionClick } from "@/utils/navigation"
 
 export interface NavigationItem {
 	id: string
