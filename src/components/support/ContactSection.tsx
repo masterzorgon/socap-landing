@@ -49,11 +49,9 @@ export function ContactSection() {
 			const result = await response.json();
 
 			if (response.ok) {
-				showToast("Message sent successfully! We'll get back to you soon.", "success");
-				// Reset form
-				event.currentTarget.reset();
+				showToast("Message sent successfully!", "success");
 			} else {
-				console.error("Error sending message:", result.error);
+				console.error("Error sending message:", response);
 				showToast("Failed to send message. Please try again.", "error");
 			}
 		} catch (error) {

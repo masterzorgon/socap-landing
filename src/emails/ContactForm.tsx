@@ -52,7 +52,7 @@ const ContactForm = ({ telegramUsername, twitterUsername, message }: ContactForm
                                 Contact Details:
                             </Text>
                             <Text className="text-black text-[14px] leading-[24px] mb-1">
-                                <strong>Telegram Username:</strong> @{telegramUsername}
+                                <strong>Telegram Username:</strong> @{telegramUsername.startsWith('@') ? telegramUsername.slice(1) : telegramUsername}
                             </Text>
                             {twitterUsername && (
                                 <Text className="text-black text-[14px] leading-[24px] mb-4">

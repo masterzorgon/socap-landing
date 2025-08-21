@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from 'resend';
+import { render } from '@react-email/components';
+import { validateEmail } from "@/utils";
 
 import NewsletterUnsubscribe from "@/emails/NewsletterUnsubscribe";
 
@@ -8,10 +10,9 @@ export async function POST(request: NextRequest) {
 
    const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
    const audience = process.env.NEXT_PUBLIC_RESEND_AUDIENCE_KEY!;
+   const marketingEmail = process.env.MARKETING_EMAIL_ADDRESS!;
 
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-   if (!emailRegex.test(email as string)) {
-      console.error("Error: Invalid email format.");
+   if (!validateEmail(email)) {
       return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
    }
 
@@ -21,7 +22,6 @@ export async function POST(request: NextRequest) {
       });
       
       const emailExists = contactList?.data.some(contact => contact.email === email);
-      
       if (!emailExists) {
          return NextResponse.json({ error: "Email not found" }, { status: 404 });
       }
@@ -31,11 +31,12 @@ export async function POST(request: NextRequest) {
          audienceId: audience
       });
 
+      const emailHtml = await render(NewsletterUnsubscribe());
       await resend.emails.send({
-         from: "hello@socapital.trade",
-         to: [email as string],
+         from: marketingEmail,
+         to: email,
          subject: "You have been unsubscribed from the Social Capital Newsletter",
-         react: NewsletterUnsubscribe(),
+         html: emailHtml,
       });
       
       return NextResponse.json({ data });
