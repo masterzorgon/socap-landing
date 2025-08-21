@@ -129,3 +129,41 @@ export async function getCategories() {
     query: CATEGORIES_QUERY,
   })
 }
+
+// ... existing code ...
+
+const RELATED_POSTS_QUERY = defineQuery(/* groq */ `*[
+  _type == "post"
+  && defined(slug.current)
+  && slug.current != $currentSlug
+  && select(defined($category) => $category in categories[]->slug.current, true)
+]|order(publishedAt desc)[0...$limit]{
+  title,
+  "slug": slug.current,
+  publishedAt,
+  mainImage,
+  excerpt,
+  author->{
+    name,
+    image,
+  },
+  categories[]->{
+    title,
+    "slug": slug.current,
+  }
+}`)
+
+export async function getRelatedPosts(
+  currentSlug: string,
+  category: string,
+  limit: number = 3
+) {
+  return await sanityFetch({
+    query: RELATED_POSTS_QUERY,
+    params: { 
+      currentSlug,
+      category: category ?? null,
+      limit
+    },
+  })
+}

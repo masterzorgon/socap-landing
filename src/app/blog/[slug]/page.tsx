@@ -14,6 +14,7 @@ import { PortableText } from 'next-sanity'
 import { notFound } from 'next/navigation'
 import { ShareButton } from '@/components/blog/share-button'
 import { TableOfContentsDropdown } from '@/components/blog/table-of-contents-dropdown'
+import { RelatedArticles } from '@/components/blog/related-articles'
 
 export async function generateMetadata({
 	params,
@@ -258,6 +259,15 @@ export default async function BlogPost({
 					</div>
 				</div>
 			</Container>
+			
+			{/* Add Related Articles component - use the first category */}
+			{post.categories && post.categories.length > 0 && (
+				<RelatedArticles 
+					currentSlug={params.slug}
+					category={post.categories[0].slug as string}
+					limit={3}
+				/>
+			)}
 			<Footer />
 		</main>
 	)
