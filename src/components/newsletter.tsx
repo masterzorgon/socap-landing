@@ -87,13 +87,18 @@ export function Newsletter({
 				showToast("Successfully signed up!", "success");
 			} else {
 				console.error("Request failed:", response);
-				const errorMessage = result.error.message || "An error occurred. Try again later.";
-				showToast(errorMessage, "error");
+				switch (response.status) {
+					case 409:
+						showToast("Email is already subscribed.", "error");
+						break;
+					default:
+						showToast("An error occurred. Try again later.", "error");
+						break;
+				}
 			}
 		} catch (error: unknown) {
 			console.error("Request failed:", error);
-			const errorMessage = error instanceof Error ? error.message : "An error occurred. Try again later.";
-			showToast(errorMessage, "error");
+			showToast("An error occurred. Try again later.", "error");
 		} finally {
 			setIsSending(false);
 			emailInput.value = '';

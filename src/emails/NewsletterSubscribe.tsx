@@ -24,14 +24,20 @@ const NewsletterSubscribe = () => {
 			<Tailwind>
 				<Body className="bg-white my-auto mx-auto font-sans px-2">
 					<Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-[465px]">
-						<Section className="mt-[32px] w-full flex justify-center items-center mx-auto">
+						<Section className="mt-[32px] w-full text-center">
 							<Link href="https://socapital.trade" title="Home">
 								<img
 									src="https://drive.google.com/thumbnail?id=1c6byqYzhsV-xq781DE7SErlBz4vxhTUC"
 									alt="Social Capital Icon"
 									width={30}
 									height={30}
-									className="inline-block align-middle mx-2"
+									style={{
+										display: 'block',
+										margin: '0 auto',
+										border: '0',
+										outline: 'none',
+										textDecoration: 'none'
+									}}
 								/>
 							</Link>
 						</Section>
@@ -43,7 +49,7 @@ const NewsletterSubscribe = () => {
 						</Text>
 						<Section className="text-center mt-[32px] mb-[32px]">
 							<Button
-								className="bg-primary rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
+								className="bg-black rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
 								href="https://socapital.trade"
 							>
 								Downlaod the Chrome Extension
