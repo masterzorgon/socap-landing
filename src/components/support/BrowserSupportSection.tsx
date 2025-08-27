@@ -48,8 +48,8 @@ export function BrowserSupportSection() {
                 </h2>
                 <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
                     {browserList.map((browserOption) => (
-                        <a href={browserOption.extension} target="_blank" rel="noopener noreferrer" className="">
-                            <div key={browserOption.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-300">
+                        <a key={browserOption.id} href={browserOption.extension} target="_blank" rel="noopener noreferrer" className="">
+                            <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-300">
                                 <div className="flex items-center mb-4">
                                     <div className="w-8 h-8 rounded-full flex items-center justify-center">
                                         <img src={browserOption.icon} alt={browserOption.title} className="w-full h-full object-contain rounded-full" />

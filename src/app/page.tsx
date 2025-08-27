@@ -43,7 +43,7 @@ function Hero() {
             </span>
             On People
             <br />
-            Like They're Memecoins
+            Like They&apos;re Memecoins
           </h1>
 
           <p className="my-8 max-w-3xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9">

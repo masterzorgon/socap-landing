@@ -63,7 +63,7 @@ export default function Unsubscribe() {
                             Unsubscribe
                         </h1>
                         <p className="mt-4 font-display text-2xl tracking-tight text-blue-900">
-                            We're sorry to see you go
+                            We&apos;re sorry to see you go
                         </p>
                     </div>
                 </Container>

@@ -58,7 +58,7 @@ const NewsletterUnsubscribe = () => {
                         <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
                         <Text className="text-[#666666] text-[12px] leading-[24px]">
                             If you were not expecting this email, you can ignore it. If
-                            you are concerned about your account's safety, please reply to
+                            you are concerned about your account&apos;s safety, please reply to
                             this email or email support@socapital.trade to get in touch with us.
                             If you would like to subscribe to our email list, please do so on our website: https://socapital.trade/#newsletter
                         </Text>

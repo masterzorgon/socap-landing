@@ -61,7 +61,7 @@ export default function Terms() {
             id: 'cookie-policy',
             title: 'Cookie Policy',
             children: [
-                <p>
+                <p key="cookie-policy-1">
                     We use cookies to improve your experience on our website. By using our website, you consent to our use of cookies.
                     Adjust your cookie preferences <Link href="/cookies" className="text-primary hover:underline">here</Link>.
                 </p>
@@ -71,7 +71,7 @@ export default function Terms() {
             id: 'privacy',
             title: 'Privacy Policy',
             children: [
-                <p>
+                <p key="privacy-1">
                     Your privacy is important to us. Please review our Privacy Policy, which also governs your use of the service.
                 </p>
             ]
@@ -80,7 +80,7 @@ export default function Terms() {
             id: 'services',
             title: 'Services Description',
             children: [
-                <p>
+                <p key="services-1">
                     Social Capital provides a decentralized exchange platform for trading digital assets.
                 </p>
             ]
@@ -89,7 +89,7 @@ export default function Terms() {
             id: 'user-accounts',
             title: 'User Accounts',
             children: [
-                <p>
+                <p key="user-accounts-1">
                     You are responsible for maintaining the confidentiality of your account information.
                 </p>
             ]
@@ -98,7 +98,7 @@ export default function Terms() {
             id: 'intellectual-property',
             title: 'Intellectual Property',
             children: [
-                <p>
+                <p key="intellectual-property-1">
                     The service and its original content, features, and functionality are owned by Social Capital and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
                 </p>,
             ]
@@ -107,7 +107,7 @@ export default function Terms() {
             id: 'limitations',
             title: 'Limitations of Liability',
             children: [
-                <p>
+                <p key="limitations-1">
                     In no event shall Social Capital, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages.
                 </p>
             ]
@@ -147,7 +147,9 @@ export default function Terms() {
                     <Header heading="Terms of Service" lead="Last updated: August 19, 2025" />
 
                     {sections.map(section => (
-                        <TermsSection key={section.id} id={section.id} title={section.title} children={section.children} />
+                        <TermsSection key={section.id} id={section.id} title={section.title}>
+                            {section.children}
+                        </TermsSection>
                     ))}
                 </div>
             </div>

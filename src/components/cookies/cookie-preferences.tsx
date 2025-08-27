@@ -91,7 +91,7 @@ export function CookiePreferences() {
                 </span>
                 <p className="text-sm text-slate-600">
                     You can also control cookies through your browser settings. Most browsers allow you to block or delete cookies,
-                    or set preferences for when cookies can be set. Check your browser's help section for instructions.
+                    or set preferences for when cookies can be set. Check your browser&apos;s help section for instructions.
                 </p>
             </div>
 
