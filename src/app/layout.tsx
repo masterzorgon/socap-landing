@@ -4,8 +4,8 @@ import { ToastProvider } from '@/components/toast-provider'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Radiant',
-    default: 'Radiant - Close every deal',
+    template: '%s - Social Capital',
+    default: 'Social Capital - The Social Sentiment Market',
   },
 }
 
