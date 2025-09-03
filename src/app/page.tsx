@@ -79,13 +79,24 @@ function Hero() {
           </h1>
 
           <p className="my-8 max-w-3xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9 text-center">
-            Social Capital{' '}
+          Speculate on attention with spot and perps. Social Capital{' '}
             <img 
               src="/so-cap-icon.svg" 
               alt="Social Capital Icon" 
               className="inline-block w-6 h-6 mx-0.5 align-middle mb-2"
             />
-            {' '}is the social sentiment market that lives on Twitter and runs on Hyperliquid. Speculate on attention with spot and perps.
+            {' '}is the social sentiment market that lives on{' '}
+            <img 
+              src="/x-icon.svg" 
+              alt="X (formerly Twitter) Icon" 
+              className="inline-block w-6 h-6 mx-0.5 align-middle mb-2"
+            />
+            {' '}and runs on Hyperliquid{' '}
+            <img 
+              src="/hyperliquid.svg" 
+              alt="Hyperliquid Icon" 
+              className="inline-block w-6 h-6 mx-0.5 align-middle mb-2"
+            />
           </p>
 
           <form onSubmit={handleNewsletterSignup} className="ring-1 ring-black/5 shadow-md bg-white/20 mt-6 p-2 rounded-2xl flex flex-col items-center gap-y-4">
@@ -114,7 +125,7 @@ function Hero() {
             </p>
           </form>
         </div>
-        <footer className="w-full flex flex-col items-center justify-center gap-y-2">
+        <footer className="w-full flex flex-col items-center justify-center gap-y-2 mt-8">
         <div className="flex items-center space-x-8">
           <a
             href="https://t.me/socapitaltrade"
