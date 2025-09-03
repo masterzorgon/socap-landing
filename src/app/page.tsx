@@ -62,24 +62,27 @@ function Hero() {
     <div id="hero" className="relative p-10 h-screen">
       <Container className="relative">
         <div className="pt-16 pb-24 sm:py-24 flex flex-col justify-center items-center text-center">
-          <div className='w-full flex justify-center items-center text-center mb-12'>
+          <div className='hidden sm:flex w-full justify-center items-center text-center mb-12'>
             <span className='text-md font-medium text-gray-950/75 ring-1 ring-black/5 px-3 py-2 rounded-lg bg-white/40 shadow-md flex items-center gap-x-2'>
             <FireIcon className='inline-block align-middle w-4' />
               Social Capital is coming soon. Sign up now!
             </span>
           </div>
-          <h1 className="pb-1 font-display text-balance text-6xl leading-[1.1] sm:text-8xl font-medium tracking-tight text-black">
+
+          <h1 className="w-screen pb-1 font-display text-balance text-4xl sm:text-6xl leading-[1.1] sm:text-8xl font-medium tracking-tight text-black">
             Turn your
             <span className="inline-block align-middle mx-3">
-              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50" className="inline-block align-middle mb-6 mx-2">
-                <path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z"></path>
-              </svg>
+            <img 
+              src="/x-icon.svg" 
+              alt="X (formerly Twitter) Icon" 
+              className="inline-block w-8 sm:w-20 mb-2 align-middle"
+            />
             </span>
             feed into a trading terminal
           </h1>
 
-          <p className="my-8 max-w-3xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9 text-center">
-          Speculate on attention with spot and perps. Social Capital{' '}
+          <p className="my-8 w-screen px-4 lg:px-0 lg:max-w-3xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9 text-center">
+            Speculate on attention with spot and perps. Social Capital{' '}
             <img 
               src="/so-cap-icon.svg" 
               alt="Social Capital Icon" 
@@ -98,7 +101,7 @@ function Hero() {
               className="inline-block w-6 h-6 mx-0.5 align-middle mb-2"
             />
           </p>
-
+          
           <form onSubmit={handleNewsletterSignup} className="ring-1 ring-black/5 shadow-md bg-white/20 mt-6 p-2 rounded-2xl flex flex-col items-center gap-y-4">
             <div className="flex items-center p-2 ring-1 ring-black/5 shadow-md rounded-xl pl-4 w-96 bg-white/40">
               <input
@@ -125,7 +128,8 @@ function Hero() {
             </p>
           </form>
         </div>
-        <footer className="w-full flex flex-col items-center justify-center gap-y-2 mt-8">
+
+        <footer className="w-full flex flex-col items-center justify-center gap-y-2 mt-32 lg:mt-8">
         <div className="flex items-center space-x-8">
           <a
             href="https://t.me/socapitaltrade"
@@ -158,6 +162,7 @@ function Hero() {
           </p>
         </div>
       </footer>
+
       </Container>
     </div>
   )
