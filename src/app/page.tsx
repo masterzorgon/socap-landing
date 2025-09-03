@@ -1,166 +1,163 @@
-import { BentoCard } from '@/components/bento-card'
+'use client'
+
+import { useState } from 'react'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
-import { Footer } from '@/components/footer'
 import { Gradient } from '@/components/gradient'
-import { Link } from '@/components/link'
-import { Navbar } from '@/components/navbar'
-import { Heading, Subheading } from '@/components/text'
-import { Preview } from '@/components/preview'
-import Carousel from '@/components/carousel'
-import { AnimatedNumber } from '@/components/animated-number'
-import { Newsletter } from '@/components/newsletter'
+import { useToast } from '@/components/toast-provider'
+import { validateEmail } from '@/utils/validate-email'
 
-import { ChevronRightIcon } from '@heroicons/react/16/solid'
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  description:
-    'Social Capital is where attention becomes a market. Anyone on X can be tokenized and traded like a speculative asset.',
-}
+import { CursorArrowRaysIcon, FireIcon, HeartIcon } from '@heroicons/react/16/solid'
 
 function Hero() {
+  const [email, setEmail] = useState('')
+  const [isSending, setIsSending] = useState(false)
+  const { showToast } = useToast()
+
+  const handleNewsletterSignup = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    if (!email.trim()) {
+      showToast("Please enter an email address", "error")
+      return
+    }
+
+    if (!validateEmail(email)) {
+      showToast("Invalid email format", "error")
+      return
+    }
+
+    setIsSending(true)
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        showToast("Successfully signed up!", "success")
+        setEmail('')
+      } else {
+        if (response.status === 409) {
+          showToast("Email is already subscribed", "error")
+        } else {
+          showToast("An error occurred. Try again later.", "error")
+        }
+      }
+    } catch (error) {
+      console.error("Request failed:", error)
+      showToast("An error occurred. Try again later.", "error")
+    } finally {
+      setIsSending(false)
+    }
+  }
+
   return (
-    <div id="hero" className="relative">
-      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
+    <div id="hero" className="relative p-10 h-screen">
       <Container className="relative">
-        <Navbar
-          banner={
-            <Link
-              href="/blog/radiant-raises-100m-series-a-from-tailwind-ventures"
-              className="flex items-center gap-1 rounded-full bg-fuchsia-950/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-fuchsia-950/30"
-            >
-              Open Beta Is Now Live!
-              <ChevronRightIcon className="size-4" />
-            </Link>
-          }
-        />
         <div className="pt-16 pb-24 sm:py-24 flex flex-col justify-center items-center text-center">
-          <h1 className="pb-1 font-display text-balance text-6xl leading-[1.1] sm:text-8xl font-medium tracking-tight text-black">
-            Speculate
-            <span className="inline-block align-middle mx-3">
-              <img src="/so-cap-icon.svg" alt="Social Capital Icon" width={60} height={60} className="inline-block align-middle mb-6 mx-2" />
+          <div className='w-full flex justify-center items-center text-center mb-12'>
+            <span className='text-md font-medium text-gray-950/75 ring-1 ring-black/5 px-3 py-2 rounded-lg bg-white/40 shadow-md flex items-center gap-x-2'>
+            <FireIcon className='inline-block align-middle w-4' />
+              Social Capital is coming soon. Sign up now!
             </span>
-            On People
-            <br />
-            Like They&apos;re Memecoins
+          </div>
+          <h1 className="pb-1 font-display text-balance text-6xl leading-[1.1] sm:text-8xl font-medium tracking-tight text-black">
+            Turn your
+            <span className="inline-block align-middle mx-3">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50" className="inline-block align-middle mb-6 mx-2">
+                <path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z"></path>
+              </svg>
+            </span>
+            feed into a trading terminal
           </h1>
 
-          <p className="my-8 max-w-3xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9">
-            Social Capital is where attention becomes a market. Anyone on X &#40;Twitter&#41; can be tokenized and traded like a speculative asset.
+          <p className="my-8 max-w-3xl text-xl leading-8 font-medium text-gray-950/75 sm:text-2xl sm:leading-9 text-center">
+            Social Capital{' '}
+            <img 
+              src="/so-cap-icon.svg" 
+              alt="Social Capital Icon" 
+              className="inline-block w-6 h-6 mx-0.5 align-middle mb-2"
+            />
+            {' '}is the social sentiment market that lives on Twitter and runs on Hyperliquid. Speculate on attention with spot and perps.
           </p>
 
-          <div className="max-lg:mt-16 lg:col-span-1">
-            <hr className="mt-6 border-t border-gray-600" />
-            <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
-              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
-                <dt className="text-sm/6 text-gray-600">24h Volume</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight bg-gradient-to-b from-gray-900 via-gray-600 to-gray-900 bg-clip-text text-transparent">
-                  $<AnimatedNumber start={100} end={150} />M
-                </dd>
-              </div>
-              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
-                <dt className="text-sm/6 text-gray-600">Markets</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight bg-gradient-to-b from-gray-900 via-gray-600 to-gray-900 bg-clip-text text-transparent">
-                  <AnimatedNumber start={2.5} end={30} />K
-                </dd>
-              </div>
-              <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-600 pb-4">
-                <dt className="text-sm/6 text-gray-600">Users</dt>
-                <dd className="order-first text-6xl font-medium tracking-tight bg-gradient-to-b from-gray-900 via-gray-600 to-gray-900 bg-clip-text text-transparent">
-                  <AnimatedNumber start={150} end={200} />K
-                </dd>
-              </div>
-            </dl>
-          </div>
-
-          <div className="mt-12 flex flex-col gap-x-6 gap-y-4">
-            <Button variant="secondary" href="#">
-              <img src="/chrome-icon.png" alt="Chrome Icon" width={20} height={20} className="inline-block align-middle mr-2" />
-              Download Chrome Extension
-            </Button>
-            <p className="text-sm text-gray-950/75">
-              Also available for other browsers.<br />
-              <a href="/support#browser-support" className="text-gray-950/75 underline hover:text-gray-950">Discover more</a>
+          <form onSubmit={handleNewsletterSignup} className="ring-1 ring-black/5 shadow-md bg-white/20 mt-6 p-2 rounded-2xl flex flex-col items-center gap-y-4">
+            <div className="flex items-center p-2 ring-1 ring-black/5 shadow-md rounded-xl pl-4 w-96 bg-white/40">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSending}
+                className="w-full outline-none focus:outline-none border-none bg-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+              <Button
+                type="submit"
+                variant="secondary"
+                disabled={isSending}
+                className="flex items-center gap-x-2 w-auto px-4"
+              >
+                <CursorArrowRaysIcon className="inline-block align-middle w-5" />
+                {isSending ? 'Signing Up...' : 'Sign Up'}
+              </Button>
+            </div>
+            <p className="text-sm text-gray-950/50 flex items-center gap-x-1 font-medium">
+              Be the first to experience social perps markets
+              <HeartIcon className="inline-block align-middle w-4" />
             </p>
-          </div>
+          </form>
         </div>
-
+        <footer className="w-full flex flex-col items-center justify-center gap-y-2">
+        <div className="flex items-center space-x-8">
+          <a
+            href="https://t.me/socapitaltrade"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-centertext-gray-700 hover:text-blue-500 transition-colors duration-200"
+          >
+            <div className="w-8 h-8  rounded-full flex items-center justify-center">
+              <svg className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+              </svg>
+            </div>
+          </a>
+          <a
+            href="https://x.com/so_capital"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center text-gray-700 hover:text-black transition-colors duration-200"
+          >
+            <div className="w-8 h-8 rounded-full flex items-center justify-center">
+              <svg className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </div>
+          </a>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-gray-600">
+            © 2025 Social Capital. All rights reserved.
+          </p>
+        </div>
+      </footer>
       </Container>
     </div>
   )
 }
 
-function BentoSection() {
-  return (
-    <div id="features">
-      <Container>
-        <Subheading>Features</Subheading>
-        <Heading as="h3" className="mt-2 max-w-3xl">
-          A Whole New Asset Class.
-        </Heading>
-
-        {/* bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat */}
-        <div className="sm:mb-[-500px] mt-10 grid grid-cols-1 gap-4 sm:mt-20 lg:grid-cols-6 lg:grid-rows-2">
-          <BentoCard
-            eyebrow="Step 1"
-            title="Token Creation"
-            description="Users vote with SOL to fund launch. LP seeded below vote price for downside protection. Anti-sniper rules enforce fair access."
-            graphic={
-              <div className="h-80 bg-[url(/screenshots/token-creation-preview.png)]" />
-            }
-            fade={['bottom']}
-            className="max-lg:rounded-t-4xl lg:col-span-2 lg:rounded-bl-4xl lg:rounded-tl-4xl"
-          />
-
-          {/* bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat */}
-          <BentoCard
-            eyebrow="Step 2"
-            title="Spot Token Launch"
-            description="SOL/token LP goes live. Presale wallets get early access. Spot traders earn 25% of perp fees. LP curve supports both stability and upside."
-            graphic={
-              <div className="absolute inset-0 bg-[url(/screenshots/spot-preview.png)]" />
-            }
-            fade={['bottom']}
-            className="lg:col-span-2"
-          />
-
-          {/* bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat */}
-          <BentoCard
-            eyebrow="Step 3"
-            title="Trade Perps with Leverage"
-            description="Perps built with D8X. Funding via internal TWAP, no oracles needed. Trade sentiment with leverage. Each token gets its own market."
-            graphic={
-              <div className="absolute inset-0 bg-[url(/screenshots/perps-preview.png)]" />
-            }
-            fade={['bottom']}
-            className="lg:col-span-2 lg:rounded-br-4xl lg:rounded-tr-4xl"
-          />
-        </div>
-      </Container>
-    </div>
-  )
-}
 
 export default function Home() {
   return (
-    <main className="overflow-hidden">
+    <main className="overflow-hidden relative">
+      <Gradient className="absolute inset-0 ring-1 ring-black/5 ring-inset" />
       <Hero />
-        <section id="carousel">
-          <Container className="mt-10">
-            <Carousel />
-          </Container>
-        </section>
-        <section className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
-          <div id="preview">
-            <Preview />
-          </div>
-          <div id="newsletter">
-            <Newsletter />
-          </div>
-          <BentoSection />
-        </section>
-      <Footer />
     </main>
   )
 }
