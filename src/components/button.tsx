@@ -13,8 +13,9 @@ const variants = {
 	),
 	secondary: clsx(
 		'relative inline-flex items-center justify-center px-4 py-[calc(--spacing(2)-1px)]',
-		'rounded-lg border border-transparent bg-white/15 shadow-md ring-1 ring-[#D15052]/15',
-		'after:absolute after:inset-0 after:rounded-lg after:shadow-[inset_0_0_2px_1px_#ffffff4d]',
+		// 'rounded-lg border border-transparent bg-white/15 shadow-md ring-1 ring-white/5',
+		'rounded-lg border border-transparent bg-white/15 shadow-md ring-1 ring-white/30',
+		// 'after:absolute after:inset-0 after:rounded-lg after:shadow-[inset_0_0_2px_1px_#ffffff4d]',
 		'text-base font-medium whitespace-nowrap text-gray-950',
 		'data-disabled:bg-white/15 data-disabled:opacity-40 data-hover:bg-white/20',
 		'data-disabled:cursor-not-allowed cursor-pointer',
