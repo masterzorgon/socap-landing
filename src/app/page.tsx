@@ -8,7 +8,7 @@ import { validateEmail } from '@/utils/validate-email'
 
 import { CursorArrowRaysIcon } from '@heroicons/react/16/solid'
 
-function StickyNewsletterSignup() {
+function CenterContent() {
 	const [email, setEmail] = useState('')
 	const [isSending, setIsSending] = useState(false)
 	const { showToast } = useToast()
@@ -58,24 +58,38 @@ function StickyNewsletterSignup() {
 	}
 
 	return (
-		<form onSubmit={handleNewsletterSignup} className="fixed right-[-130px] top-1/2 transform translate-y-4/5 translate-y-[200px] rotate-[-90deg] z-50 flex gap-2 justify-center items-center">
-			<input
-				type="email"
-				placeholder="Enter your email"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}
-				disabled={isSending}
-				className="text-sm flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-			/>
-			<Button
-				type="submit"
-				variant="secondary"
-				disabled={isSending}
-				className="text-sm py-2 px-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
-			>
-				{isSending ? 'Signing Up...' : 'Sign Up'}
-			</Button>
-		</form>
+		<div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+			<div className="bg-gray-950/80 backdrop-blur-sm p-6">
+				<h3 className="text-white font-semibold text-lg mb-3">
+					Turn your Twitter feed into a trading terminal
+				</h3>
+				<p className="text-white/80 text-sm leading-relaxed mb-4">
+					Social Capital is the social sentiment market that lives on Twitter and runs on Hyperliquid. 
+				</p>
+				<p className="text-white/80 text-sm leading-relaxed mb-6">
+					Speculate on reputation, influence, and attention, using spot and perps — all without leaving the timeline. <span className="text-sm inline-flex items-center gap-x-1">Coming to your <svg className="w-4 h-4 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg> feed Q4 2025</span>
+				</p>
+				
+				<form onSubmit={handleNewsletterSignup} className="flex gap-2">
+					<input
+						type="email"
+						placeholder="Enter your email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						disabled={isSending}
+						className="text-sm flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+					/>
+					<Button
+						type="submit"
+						variant="secondary"
+						disabled={isSending}
+						className="text-sm py-2 px-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
+					>
+						{isSending ? 'Signing Up...' : 'Sign Up'}
+					</Button>
+				</form>
+			</div>
+		</div>
 	)
 }
 
@@ -139,13 +153,6 @@ function Hero() {
 						alt="Social Capital Wordmark"
 						className="max-w-full h-auto"
 					/>
-					<p className="flex items-center gap-x-2 font-medium">
-						Coming to your
-						<svg className="w-4 h-4 text-white/80" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-						</svg>
-						feed Q4 2025
-					</p>
 				</div>
 			</div>
 		</div>
@@ -154,15 +161,19 @@ function Hero() {
 
 function BottomLeftText() {
 	return (
-		<div className="fixed bottom-20 left-8 max-w-md z-40">
+		<div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-20 z-40">
 			<div className="bg-gray-950/80 backdrop-blur-sm p-6">
 				<h3 className="text-white font-semibold text-lg mb-3">
 					Turn your Twitter feed into a trading terminal
 				</h3>
 				<p className="text-white/80 text-sm leading-relaxed mb-4">
-					Social Capital is the social sentiment market that lives on Twitter and runs on Hyperliquid. Speculate on reputation, influence, and attention, using spot and perps — all without leaving the timeline.
+					Social Capital is the social sentiment market that lives on Twitter and runs on Hyperliquid. 
+				</p>
+				<p className="text-white/80 text-sm leading-relaxed mb-4">
+					Speculate on reputation, influence, and attention, using spot and perps — all without leaving the timeline.
 				</p>
 			</div>
+			
 		</div>
 	)
 }
@@ -209,8 +220,7 @@ export default function Home() {
 	return (
 		<main className="overflow-hidden relative bg-gray-950">
 			<Hero />
-			<BottomLeftText />
-			<StickyNewsletterSignup />
+			<CenterContent />
 			<Footer />
 		</main>
 	)
