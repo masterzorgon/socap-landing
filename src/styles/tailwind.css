@@ -8,6 +8,17 @@
   --color-primary: #fd3bb8;
 }
 
+/* Global dark theme defaults */
+:root {
+  --background: #070a13; /* gray-950 */
+  --foreground: #ffffff; /* white */
+}
+
+* {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
 @keyframes move-x {
   0% {
     transform: translateX(var(--move-x-from));

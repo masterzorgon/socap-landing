@@ -28,7 +28,7 @@ export default function RootLayout({
           href="/blog/feed.xml"
         />
       </head>
-      <body className="text-gray-950 antialiased">
+      <body className="bg-gray-900 text-white antialiased">
         <ToastProvider>
           {children}
         </ToastProvider>
