@@ -2,11 +2,8 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/button'
-import { Container } from '@/components/container'
 import { useToast } from '@/components/toast-provider'
 import { validateEmail } from '@/utils/validate-email'
-
-import { CursorArrowRaysIcon } from '@heroicons/react/16/solid'
 
 function CenterContent() {
 	const [email, setEmail] = useState('')
@@ -67,7 +64,7 @@ function CenterContent() {
 					Social Capital is the social sentiment market that lives on Twitter and runs on Hyperliquid. 
 				</p>
 				<p className="text-white/80 text-sm leading-relaxed mb-6">
-					Speculate on reputation, influence, and attention, using spot and perps — all without leaving the timeline. <span className="text-sm inline-flex items-center gap-x-1">Coming to your <svg className="w-4 h-4 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg> feed Q4 2025</span>
+					Speculate on reputation, influence, and attention, using spot and perps — all without leaving the timeline.
 				</p>
 				
 				<form onSubmit={handleNewsletterSignup} className="flex gap-2">
@@ -94,86 +91,19 @@ function CenterContent() {
 }
 
 function Hero() {
-	const [email, setEmail] = useState('')
-	const [isSending, setIsSending] = useState(false)
-	const { showToast } = useToast()
-
-	const handleNewsletterSignup = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault()
-
-		if (!email.trim()) {
-			showToast("Please enter an email address", "error")
-			return
-		}
-
-		if (!validateEmail(email)) {
-			showToast("Invalid email format", "error")
-			return
-		}
-
-		setIsSending(true)
-
-		try {
-			const response = await fetch('/api/newsletter', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ email }),
-			})
-
-			const result = await response.json()
-
-			if (response.ok) {
-				showToast("Successfully signed up!", "success")
-				setEmail('')
-			} else {
-				if (response.status === 409) {
-					showToast("Email is already subscribed", "error")
-				} else {
-					showToast("An error occurred. Try again later.", "error")
-				}
-			}
-		} catch (error) {
-			console.error("Request failed:", error)
-			showToast("An error occurred. Try again later.", "error")
-		} finally {
-			setIsSending(false)
-		}
-	}
-
 	return (
 		<div id="hero" className="relative p-10 h-screen">
 
 			<div className="flex flex-col justify-center items-center text-center flex-1">
-				{/* logo */}
 				<div className="flex justify-center items-center mb-8 flex-col items-start gap-y-8">
 					<img
 						src="/wordmark.png"
 						alt="Social Capital Wordmark"
 						className="max-w-full h-auto"
 					/>
+					<span className="text-md font-medium inline-flex items-center gap-x-1">Coming to your <svg className="w-4 h-4 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg> feed Q4 2025</span>
 				</div>
 			</div>
-		</div>
-	)
-}
-
-function BottomLeftText() {
-	return (
-		<div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-20 z-40">
-			<div className="bg-gray-950/80 backdrop-blur-sm p-6">
-				<h3 className="text-white font-semibold text-lg mb-3">
-					Turn your Twitter feed into a trading terminal
-				</h3>
-				<p className="text-white/80 text-sm leading-relaxed mb-4">
-					Social Capital is the social sentiment market that lives on Twitter and runs on Hyperliquid. 
-				</p>
-				<p className="text-white/80 text-sm leading-relaxed mb-4">
-					Speculate on reputation, influence, and attention, using spot and perps — all without leaving the timeline.
-				</p>
-			</div>
-			
 		</div>
 	)
 }
